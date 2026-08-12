@@ -688,7 +688,9 @@ const CONFIG = {
       ],
       stack: ["Web App", "Dashboard", "Laporan Keuangan", "Responsive"],
       url: "https://mdnet.pages.dev/",
-      accent: "#22d3ee"
+      accent: "#22d3ee",
+      shotDesktop: "image/mdnet-desktop.png",
+      shotMobile:  "image/mdnet-mobile.png"
     },
     {
       name: "Tahfidz Darul Rasyid",
@@ -703,7 +705,9 @@ const CONFIG = {
       ],
       stack: ["Sistem Pesantren", "Progres Hafalan", "Multi-User", "Laporan"],
       url: "https://tahfidz-darul-rasyid.pages.dev/",
-      accent: "#e879f9"
+      accent: "#e879f9",
+      shotDesktop: "image/tahfidz-desktop.png",
+      shotMobile:  "image/tahfidz-mobile.png"
     },
     {
       name: "TPQ Digital",
@@ -718,7 +722,9 @@ const CONFIG = {
       ],
       stack: ["Sistem TPQ", "Absensi Digital", "Rapor Santri", "Responsive"],
       url: "https://tpq-digital.pages.dev/",
-      accent: "#34d399"
+      accent: "#34d399",
+      shotDesktop: "image/tpq-desktop.png",
+      shotMobile:  "image/tpq-mobile.png"
     }
   ],
 
@@ -875,15 +881,13 @@ const ICONS = {
       </div>`;
     list.appendChild(art);
 
-    /* pakai screenshot asli kalau tersedia, kalau tidak → skeleton tetap tampil */
+    /* pakai screenshot asli kalau tersedia, kalau tidak → skeleton tetap tampil.
+       Ekstensi fleksibel: .png / .jpg / .jpeg / .webp sama-sama dicoba. */
     [['desktop', p.shotDesktop], ['mobile', p.shotMobile]].forEach(([kind, src]) => {
-      if (!src) return;
-      const img = new Image();
-      img.onload = () => {
+      tryImages(shotCandidates(src), 0, (found) => {
         const slot = art.querySelector(`.mock-screen[data-shot="${kind}"]`);
-        if (slot) slot.innerHTML = `<img src="${src}" alt="Tampilan ${kind} ${p.name}" loading="lazy" />`;
-      };
-      img.src = src;
+        if (slot) slot.innerHTML = `<img src="${found}" alt="Tampilan ${kind} ${p.name}" loading="lazy" />`;
+      });
     });
   });
 
@@ -915,12 +919,28 @@ const ICONS = {
 
   /* ---- Foto profil / background (opsional) ---- */
   const avatarImg = $('#avatarImg');
+
+  /* Coba beberapa path berurutan, pakai yang pertama berhasil dimuat. */
   function tryImages(paths, i, onFound) {
-    if (i >= paths.length) return;
+    if (!paths || i >= paths.length) return;
     const img = new Image();
     img.onload = () => onFound(paths[i]);
     img.onerror = () => tryImages(paths, i + 1, onFound);
     img.src = paths[i];
+  }
+
+  /* "image/mdnet-desktop.png" → coba juga .jpg / .jpeg / .webp,
+     jadi tidak perlu convert screenshot ke format tertentu.
+     Bisa juga diisi array path langsung di CONFIG. */
+  function shotCandidates(src) {
+    if (!src) return [];
+    if (Array.isArray(src)) return src;
+    const dot = src.lastIndexOf('.');
+    if (dot < 1) return [src];
+    const base = src.slice(0, dot);
+    return [src.slice(dot).toLowerCase(), '.png', '.jpg', '.jpeg', '.webp']
+      .map((e) => base + e)
+      .filter((path, idx, all) => all.indexOf(path) === idx);
   }
   tryImages(CONFIG.photoAvatar, 0, (src) => { avatarImg.src = src; });
   tryImages(CONFIG.photoBg, 0, (src) => {
