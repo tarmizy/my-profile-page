@@ -4,7 +4,7 @@ import useReveal from '../shared/useReveal';
 import DesktopNav from './DesktopNav';
 import DesktopHero from './DesktopHero';
 import DesktopServices from './DesktopServices';
-import DesktopPortfolio from './DesktopPortfolio';
+import PortfolioCards from '../shared/PortfolioCards';
 import DesktopFeatures from './DesktopFeatures';
 import DesktopPricing from './DesktopPricing';
 import DesktopProcess from './DesktopProcess';
@@ -19,7 +19,16 @@ export default function DesktopPage() {
       <DesktopNav />
       <DesktopHero />
       <DesktopServices />
-      <DesktopPortfolio />
+      <section id="portfolio" style={{ padding: '72px 32px' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div className="section-head reveal">
+            <span className="eyebrow"><span className="dot" /> Portfolio</span>
+            <h2 className="title">Sistem yang sudah saya bangun & jalan</h2>
+            <p className="subtitle">Bukan konsep — sudah online dan bisa Anda buka. Klik untuk lihat detail.</p>
+          </div>
+          <PortfolioCards isMobile={false} />
+        </div>
+      </section>
       <DesktopFeatures />
       <DesktopPricing />
       <DesktopProcess />

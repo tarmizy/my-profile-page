@@ -6,7 +6,7 @@ import Icon from '../shared/Icon';
 import MobileNav from './MobileNav';
 import MobileHero from './MobileHero';
 import MobileServices from './MobileServices';
-import MobilePortfolio from './MobilePortfolio';
+import PortfolioCards from '../shared/PortfolioCards';
 import MobileFeatures from './MobileFeatures';
 import MobilePricing from './MobilePricing';
 import MobileProcess from './MobileProcess';
@@ -21,7 +21,14 @@ export default function MobilePage() {
       <MobileNav />
       <MobileHero />
       <MobileServices />
-      <MobilePortfolio />
+      <section id="portfolio" style={{ padding: '50px 16px' }}>
+        <div className="section-head reveal">
+          <span className="eyebrow"><span className="dot" /> Portfolio</span>
+          <h2 className="title">Sistem yang sudah jalan</h2>
+          <p className="subtitle">Bukan konsep — sudah online dan bisa Anda buka. Klik untuk lihat detail.</p>
+        </div>
+        <PortfolioCards isMobile={true} />
+      </section>
       <MobileFeatures />
       <MobilePricing />
       <MobileProcess />
