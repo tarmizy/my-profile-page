@@ -32,9 +32,9 @@
 /* ============================================================
    TARMIZI — DEVELOPER PORTFOLIO / SALES LANDING PAGE (2026)
 
-   ⚙️  EDIT KONTEN: cari "CONFIG = {" di bagian <script> di bawah.
-   📸  FOTO PROFIL: taruh "avatar.jpg" di folder yang sama.
-   🖼️  SCREENSHOT PROJECT (SANGAT DISARANKAN):
+   EDIT KONTEN: cari "CONFIG = {" di bagian <script> di bawah.
+   FOTO PROFIL: taruh "avatar.jpg" di folder yang sama.
+   SCREENSHOT PROJECT (sangat disarankan):
        taruh screenshot asli di folder image/ lalu isi field
        shotDesktop & shotMobile di CONFIG.projects.
        Kalau file tidak ada → otomatis pakai mockup UI bawaan.
@@ -169,9 +169,19 @@ h2.title { font-family: "Space Grotesk", sans-serif; font-size: clamp(1.5rem, 4.
 .hero .role-line { margin-top: 12px; font-size: clamp(.95rem, 2.6vw, 1.12rem); color: #dfe4ff; font-weight: 500; }
 .role-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px; }
 .role-chip {
-  padding: 6px 13px; font-size: .74rem; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 14px; font-size: .74rem; font-weight: 600;
   color: #cfe7ff; background: rgba(255,255,255,.06); border: 1px solid var(--border); border-radius: 999px;
 }
+
+/* ---------- IKON (SVG, diisi dari ICONS via data-ico) ---------- */
+.ico { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ico svg { width: 100%; height: 100%; display: block; }
+.role-chip .ico { width: 15px; height: 15px; color: var(--cyan); }
+.btn .ico { width: 17px; height: 17px; }
+.contact-meta .ico { width: 15px; height: 15px; color: #cfe7ff; }
+.price-time .ico { width: 14px; height: 14px; }
+.addons h4 .ico { width: 17px; height: 17px; color: var(--violet); }
 .hero .pitch { max-width: 620px; margin: 20px auto 0; color: var(--text-dim); font-size: 1rem; line-height: 1.8; }
 .hero .pitch b { color: #eef0ff; }
 .hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; }
@@ -319,16 +329,24 @@ h2.title { font-family: "Space Grotesk", sans-serif; font-size: clamp(1.5rem, 4.
 .resp-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
 @media (min-width: 720px) { .resp-grid { grid-template-columns: repeat(2, 1fr); } }
 .resp-card { padding: 26px 24px; }
-.resp-card .ic { font-size: 1.6rem; }
-.resp-card h3 { margin-top: 12px; font-family: "Space Grotesk", sans-serif; font-size: 1.05rem; font-weight: 700; }
+.resp-card .ic {
+  width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center;
+  background: rgba(139,92,246,.16); border: 1px solid rgba(139,92,246,.35);
+}
+.resp-card .ic .ico { width: 22px; height: 22px; color: #cfe7ff; }
+.resp-card h3 { margin-top: 14px; font-family: "Space Grotesk", sans-serif; font-size: 1.05rem; font-weight: 700; }
 .resp-card p { margin-top: 8px; font-size: .87rem; color: var(--text-dim); line-height: 1.7; }
 
 /* ---------- FITUR STANDAR ---------- */
 .feat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 @media (min-width: 720px) { .feat-grid { grid-template-columns: repeat(4, 1fr); } }
-.feat-item { padding: 18px 16px; text-align: center; }
-.feat-item .fi { font-size: 1.35rem; }
-.feat-item h4 { margin-top: 9px; font-size: .87rem; font-weight: 700; }
+.feat-item { padding: 20px 16px; text-align: center; }
+.feat-item .fi {
+  width: 42px; height: 42px; margin: 0 auto; border-radius: 12px; display: grid; place-items: center;
+  background: rgba(139,92,246,.14); border: 1px solid rgba(139,92,246,.3);
+}
+.feat-item .fi .ico { width: 20px; height: 20px; color: #cfe7ff; }
+.feat-item h4 { margin-top: 11px; font-size: .87rem; font-weight: 700; }
 .feat-item p { margin-top: 5px; font-size: .75rem; color: var(--text-dim); line-height: 1.55; }
 
 /* ---------- PRICING ---------- */
@@ -346,12 +364,12 @@ h2.title { font-family: "Space Grotesk", sans-serif; font-size: clamp(1.5rem, 4.
 .price-desc { margin-top: 6px; font-size: .82rem; color: var(--text-dim); line-height: 1.6; min-height: 42px; }
 .price-from { margin-top: 18px; font-size: .72rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .06em; }
 .price-num { margin-top: 2px; font-family: "Space Grotesk", sans-serif; font-size: 1.75rem; font-weight: 800; color: #fff; letter-spacing: -.02em; }
-.price-time { margin-top: 6px; font-size: .76rem; color: var(--text-dim); }
+.price-time { margin-top: 8px; font-size: .76rem; color: var(--text-dim); display: flex; align-items: center; gap: 6px; }
 .price-list { margin: 18px 0 22px; list-style: none; display: flex; flex-direction: column; gap: 9px; flex: 1; }
 .price-list li { font-size: .85rem; color: #dfe4ff; display: flex; gap: 9px; align-items: flex-start; line-height: 1.5; }
 .price-list li svg { width: 15px; height: 15px; flex-shrink: 0; margin-top: 3px; stroke: var(--green); }
 .addons { margin-top: 30px; padding: 22px 24px; }
-.addons h4 { font-family: "Space Grotesk", sans-serif; font-size: .95rem; font-weight: 700; }
+.addons h4 { font-family: "Space Grotesk", sans-serif; font-size: .95rem; font-weight: 700; display: flex; align-items: center; gap: 9px; }
 .addon-list { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 9px; }
 .addon-list span {
   font-size: .78rem; padding: 7px 13px; border-radius: 999px;
@@ -375,6 +393,7 @@ h2.title { font-family: "Space Grotesk", sans-serif; font-size: clamp(1.5rem, 4.
 .contact-card p { margin-top: 12px; color: var(--text-dim); max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.7; }
 .contact-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 26px; }
 .contact-meta { margin-top: 22px; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; font-size: .84rem; color: var(--text-dim); }
+.contact-meta span { display: inline-flex; align-items: center; gap: 8px; }
 .contact-meta a { color: #cfe7ff; text-decoration: none; }
 .contact-meta a:hover { text-decoration: underline; }
 
@@ -459,15 +478,15 @@ h2.title { font-family: "Space Grotesk", sans-serif; font-size: clamp(1.5rem, 4.
     <h1 id="heroName">Tarmizi</h1>
     <p class="role-line" id="heroRole">Web Developer · Mobile Developer · DevSecOps</p>
     <div class="role-chips">
-      <span class="role-chip">🌐 Sistem Berbasis Web</span>
-      <span class="role-chip">📱 Aplikasi Mobile</span>
-      <span class="role-chip">📊 Dashboard &amp; Laporan</span>
-      <span class="role-chip">🛡️ Aman by Design</span>
+      <span class="role-chip"><span class="ico" data-ico="globe"></span> Sistem Berbasis Web</span>
+      <span class="role-chip"><span class="ico" data-ico="smartphone"></span> Aplikasi Mobile</span>
+      <span class="role-chip"><span class="ico" data-ico="chart"></span> Dashboard &amp; Laporan</span>
+      <span class="role-chip"><span class="ico" data-ico="shield"></span> Aman by Design</span>
     </div>
     <p class="pitch">Saya membangun <b>sistem manajemen digital</b> yang menggantikan pencatatan manual di buku dan Excel — data pelanggan, santri, tagihan, dan absensi jadi <b>satu tempat</b>, lengkap dengan <b>dashboard &amp; laporan otomatis</b> yang bisa dibuka dari HP maupun komputer.</p>
 
     <div class="hero-ctas">
-      <a class="btn btn-primary" id="heroCtaPrimary" href="#" target="_blank" rel="noopener noreferrer">💬 Konsultasi Gratis via WhatsApp</a>
+      <a class="btn btn-primary" id="heroCtaPrimary" href="#" target="_blank" rel="noopener noreferrer"><span class="ico" data-ico="wa"></span> Konsultasi Gratis via WhatsApp</a>
       <a class="btn btn-ghost" href="#portfolio">Lihat Hasil Kerja Saya</a>
     </div>
 
@@ -545,12 +564,12 @@ h2.title { font-family: "Space Grotesk", sans-serif; font-size: clamp(1.5rem, 4.
     </div>
     <div class="resp-grid">
       <div class="card resp-card reveal">
-        <div class="ic">📱</div>
+        <div class="ic"><span class="ico" data-ico="smartphone"></span></div>
         <h3>Di HP — untuk yang di lapangan</h3>
         <p>Petugas, pengajar, atau admin bisa input absensi dan cek data langsung dari HP. Tombol besar, menu sederhana, tidak perlu zoom-in. Bisa langsung ditambahkan ke home screen seperti aplikasi.</p>
       </div>
       <div class="card resp-card reveal">
-        <div class="ic">🖥️</div>
+        <div class="ic"><span class="ico" data-ico="monitor"></span></div>
         <h3>Di desktop — untuk kerja serius</h3>
         <p>Layar lebar dipakai maksimal: tabel data lengkap, filter, dashboard grafik, dan cetak laporan. Cocok untuk pekerjaan admin dan rekap bulanan di kantor.</p>
       </div>
@@ -567,14 +586,14 @@ h2.title { font-family: "Space Grotesk", sans-serif; font-size: clamp(1.5rem, 4.
       <p class="subtitle">Anda tidak perlu memintanya satu per satu — ini sudah jadi bagian dari cara saya bekerja.</p>
     </div>
     <div class="feat-grid">
-      <div class="card feat-item reveal"><div class="fi">📊</div><h4>Dashboard Ringkasan</h4><p>Angka penting terlihat begitu login.</p></div>
-      <div class="card feat-item reveal"><div class="fi">🧾</div><h4>Laporan &amp; Cetak</h4><p>Rekap periodik, siap print atau export.</p></div>
-      <div class="card feat-item reveal"><div class="fi">👥</div><h4>Multi-User</h4><p>Hak akses beda tiap peran/jabatan.</p></div>
-      <div class="card feat-item reveal"><div class="fi">🔍</div><h4>Cari &amp; Filter</h4><p>Temukan data dalam hitungan detik.</p></div>
-      <div class="card feat-item reveal"><div class="fi">💾</div><h4>Backup Data</h4><p>Data aman, tidak hilang begitu saja.</p></div>
-      <div class="card feat-item reveal"><div class="fi">📱</div><h4>Mobile Friendly</h4><p>Enak dipakai dari HP tanpa aplikasi.</p></div>
-      <div class="card feat-item reveal"><div class="fi">🔒</div><h4>Login Aman</h4><p>Data pribadi tidak bisa diakses publik.</p></div>
-      <div class="card feat-item reveal"><div class="fi">🎓</div><h4>Training Pemakaian</h4><p>Tim Anda diajari sampai bisa.</p></div>
+      <div class="card feat-item reveal"><div class="fi"><span class="ico" data-ico="chart"></span></div><h4>Dashboard Ringkasan</h4><p>Angka penting terlihat begitu login.</p></div>
+      <div class="card feat-item reveal"><div class="fi"><span class="ico" data-ico="report"></span></div><h4>Laporan &amp; Cetak</h4><p>Rekap periodik, siap print atau export.</p></div>
+      <div class="card feat-item reveal"><div class="fi"><span class="ico" data-ico="users"></span></div><h4>Multi-User</h4><p>Hak akses beda tiap peran/jabatan.</p></div>
+      <div class="card feat-item reveal"><div class="fi"><span class="ico" data-ico="search"></span></div><h4>Cari &amp; Filter</h4><p>Temukan data dalam hitungan detik.</p></div>
+      <div class="card feat-item reveal"><div class="fi"><span class="ico" data-ico="database"></span></div><h4>Backup Data</h4><p>Data aman, tidak hilang begitu saja.</p></div>
+      <div class="card feat-item reveal"><div class="fi"><span class="ico" data-ico="smartphone"></span></div><h4>Mobile Friendly</h4><p>Enak dipakai dari HP tanpa aplikasi.</p></div>
+      <div class="card feat-item reveal"><div class="fi"><span class="ico" data-ico="lock"></span></div><h4>Login Aman</h4><p>Data pribadi tidak bisa diakses publik.</p></div>
+      <div class="card feat-item reveal"><div class="fi"><span class="ico" data-ico="training"></span></div><h4>Training Pemakaian</h4><p>Tim Anda diajari sampai bisa.</p></div>
     </div>
   </div>
 </section>
@@ -590,7 +609,7 @@ h2.title { font-family: "Space Grotesk", sans-serif; font-size: clamp(1.5rem, 4.
     <div class="pricing-grid" id="pricingGrid"></div>
 
     <div class="card addons reveal">
-      <h4>💡 Layanan tambahan</h4>
+      <h4><span class="ico" data-ico="plus"></span> Layanan tambahan</h4>
       <div class="addon-list" id="addonList"></div>
     </div>
 
@@ -621,8 +640,8 @@ h2.title { font-family: "Space Grotesk", sans-serif; font-size: clamp(1.5rem, 4.
       <h2>Masih catat data di buku atau Excel?</h2>
       <p>Ceritakan cara kerja Anda sekarang — saya bantu ubah jadi sistem digital yang rapi, aman, dan gampang dipakai semua tim. Konsultasi awal gratis, tanpa komitmen.</p>
       <div class="contact-ctas">
-        <a class="btn btn-primary" id="contactWa" href="#" target="_blank" rel="noopener noreferrer">💬 Chat WhatsApp Sekarang</a>
-        <a class="btn btn-ghost" id="contactEmail" href="#">✉️ Kirim Email</a>
+        <a class="btn btn-primary" id="contactWa" href="#" target="_blank" rel="noopener noreferrer"><span class="ico" data-ico="wa"></span> Chat WhatsApp Sekarang</a>
+        <a class="btn btn-ghost" id="contactEmail" href="#"><span class="ico" data-ico="mail"></span> Kirim Email</a>
       </div>
       <div class="contact-meta">
         <span id="metaPhone"></span>
@@ -648,7 +667,7 @@ h2.title { font-family: "Space Grotesk", sans-serif; font-size: clamp(1.5rem, 4.
 
 <script>
 /* ============================================================
-   ⚙️  CONFIG — EDIT SEMUA KONTEN DI SINI
+   CONFIG — EDIT SEMUA KONTEN DI SINI
    ============================================================ */
 const CONFIG = {
   name: "Tarmizi",
@@ -670,7 +689,7 @@ const CONFIG = {
 
   /* ---------------------------------------------------------
      PROJECTS
-     💡 shotDesktop / shotMobile: isi dengan path screenshot ASLI
+     shotDesktop / shotMobile: isi dengan path screenshot ASLI
         (mis. "image/mdnet-desktop.png"). Kalau kosong atau file
         tidak ditemukan → otomatis pakai mockup UI bawaan.
      --------------------------------------------------------- */
@@ -679,16 +698,16 @@ const CONFIG = {
       name: "MDNet",
       tag: "Manajemen Pelanggan WiFi",
       for: "Untuk penyedia jasa internet / RT-RW Net",
-      desc: "Sistem untuk mengelola pelanggan WiFi dari satu tempat: data pelanggan, paket langganan, tagihan bulanan, sampai status pembayaran. Tidak perlu lagi catat manual siapa yang sudah bayar dan siapa yang menunggak — semuanya terlihat jelas di dashboard, lengkap dengan laporan pendapatan.",
+      desc: "Admin console lengkap untuk mengelola pelanggan WiFi dari satu tempat — plus aplikasi mobile untuk petugas di lapangan. Begitu login, langsung terlihat berapa pelanggan aktif, siapa yang belum bayar, dan pendapatan bulan ini. Tidak perlu lagi rekap manual: tagihan, invoice, dan laporan keuangan terbentuk sendiri.",
       features: [
-        "Data pelanggan &amp; paket langganan terpusat",
-        "Tagihan bulanan &amp; status pembayaran",
-        "Laporan pendapatan &amp; daftar tunggakan",
-        "Pantau pelanggan aktif / nonaktif"
+        "Dashboard operasional: pelanggan aktif &amp; tunggakan",
+        "Paket internet, tagihan, invoice &amp; pembayaran",
+        "Laporan keuangan: pemasukan, pengeluaran, net profit",
+        "Pengingat jatuh tempo otomatis"
       ],
-      stack: ["Web App", "Dashboard", "Laporan Keuangan", "Responsive"],
+      stack: ["Admin Console", "Aplikasi Mobile", "Laporan Keuangan", "Multi-User"],
       url: "https://mdnet.pages.dev/",
-      accent: "#22d3ee",
+      accent: "#7c5cff",
       shotDesktop: "image/mdnet-desktop.png",
       shotMobile:  "image/mdnet-mobile.png"
     },
@@ -785,11 +804,29 @@ const CONFIG = {
 /* ============================================================
    MESIN RENDER
    ============================================================ */
+const S = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"';
 const ICONS = {
-  gh: '<svg viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.1 1.2a10.7 10.7 0 0 1 5.6 0c2.1-1.5 3.1-1.2 3.1-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.6.8.5A11.5 11.5 0 0 0 12 .5z"/></svg>',
-  ig: '<svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9-.1-1.3-.1-1.6-.1-4.8s0-3.6.1-4.8C2.4 4 4 2.4 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zm0 3.7a6.1 6.1 0 1 0 0 12.2 6.1 6.1 0 0 0 0-12.2zm0 10a4 4 0 1 1 0-7.9 4 4 0 0 1 0 7.9zm6.3-10.2a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9z"/></svg>',
-  wa: '<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>',
-  li: '<svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45z"/></svg>',
+  /* --- ikon UI (line icon, mengikuti gaya ikon di aplikasi) --- */
+  globe:      `<svg ${S}><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg>`,
+  smartphone: `<svg ${S}><rect x="6" y="2" width="12" height="20" rx="2.6"/><path d="M10.5 18.6h3"/></svg>`,
+  monitor:    `<svg ${S}><rect x="2.5" y="4" width="19" height="12.5" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/></svg>`,
+  chart:      `<svg ${S}><path d="M3.5 20.5h17"/><g stroke-width="2.8"><path d="M7.6 20.5v-5.4"/><path d="M12 20.5v-9.4"/><path d="M16.4 20.5v-3.4"/></g></svg>`,
+  shield:     `<svg ${S}><path d="M12 3l7.5 3.3v5.2c0 4.5-3.1 7.8-7.5 9.5-4.4-1.7-7.5-5-7.5-9.5V6.3L12 3z"/><path d="M9.2 12.2l2 2 3.6-3.8"/></svg>`,
+  report:     `<svg ${S}><path d="M14 3H7.5A2 2 0 0 0 5.5 5v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8l-4.5-5z"/><path d="M14 3v5h4.5"/><path d="M9 13.5h6M9 17h4"/></svg>`,
+  users:      `<svg ${S}><path d="M15.5 20.5v-1.6a4 4 0 0 0-4-4h-4a4 4 0 0 0-4 4v1.6"/><circle cx="9.5" cy="7.5" r="3.6"/><path d="M16.8 4.3a3.3 3.3 0 0 1 0 6.4"/><path d="M20.5 20.5v-1.6a3.7 3.7 0 0 0-2.4-3.4"/></svg>`,
+  search:     `<svg ${S}><circle cx="10.5" cy="10.5" r="6.6"/><path d="M15.4 15.4L21 21"/></svg>`,
+  database:   `<svg ${S}><ellipse cx="12" cy="6" rx="7.5" ry="3.2"/><path d="M4.5 6v6c0 1.8 3.4 3.2 7.5 3.2s7.5-1.4 7.5-3.2V6"/><path d="M4.5 12v6c0 1.8 3.4 3.2 7.5 3.2s7.5-1.4 7.5-3.2v-6"/></svg>`,
+  lock:       `<svg ${S}><rect x="4.5" y="10.4" width="15" height="10.6" rx="2.2"/><path d="M8 10.4V7.6a4 4 0 0 1 8 0v2.8"/></svg>`,
+  training:   `<svg ${S}><path d="M12 3.2L2.6 8 12 12.8 21.4 8 12 3.2z"/><path d="M6.2 10.4V16c0 1.8 2.6 3.2 5.8 3.2s5.8-1.4 5.8-3.2v-5.6"/></svg>`,
+  clock:      `<svg ${S}><circle cx="12" cy="12" r="8.6"/><path d="M12 7.4V12l3.3 2"/></svg>`,
+  plus:       `<svg ${S}><circle cx="12" cy="12" r="8.6"/><path d="M12 8.4v7.2M8.4 12h7.2"/></svg>`,
+  mail:       `<svg ${S}><rect x="2.6" y="5" width="18.8" height="14" rx="2.2"/><path d="M3.2 7.2L12 13l8.8-5.8"/></svg>`,
+
+  /* --- ikon brand (solid) --- */
+  gh: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.1 1.2a10.7 10.7 0 0 1 5.6 0c2.1-1.5 3.1-1.2 3.1-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.6.8.5A11.5 11.5 0 0 0 12 .5z"/></svg>',
+  ig: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9-.1-1.3-.1-1.6-.1-4.8s0-3.6.1-4.8C2.4 4 4 2.4 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zm0 3.7a6.1 6.1 0 1 0 0 12.2 6.1 6.1 0 0 0 0-12.2zm0 10a4 4 0 1 1 0-7.9 4 4 0 0 1 0 7.9zm6.3-10.2a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9z"/></svg>',
+  wa: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>',
+  li: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45z"/></svg>',
   check: '<svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>',
   ext: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px"><path d="M7 17L17 7M7 7h10v10"/></svg>'
 };
@@ -808,8 +845,8 @@ const ICONS = {
   /* ---- CTA ---- */
   ['#navCta', '#heroCtaPrimary', '#contactWa', '#waFloat'].forEach((sel) => { $(sel).href = waLink(); });
   $('#contactEmail').href = `mailto:${CONFIG.email}?subject=${encodeURIComponent('Konsultasi Project Sistem / Aplikasi')}`;
-  $('#metaPhone').innerHTML = `📱 <a href="${waLink()}" target="_blank" rel="noopener noreferrer">+${CONFIG.whatsapp}</a>`;
-  $('#metaEmail').innerHTML = `✉️ <a href="mailto:${CONFIG.email}">${CONFIG.email}</a>`;
+  $('#metaPhone').innerHTML = `<span class="ico" data-ico="wa"></span> <a href="${waLink()}" target="_blank" rel="noopener noreferrer">+${CONFIG.whatsapp}</a>`;
+  $('#metaEmail').innerHTML = `<span class="ico" data-ico="mail"></span> <a href="mailto:${CONFIG.email}">${CONFIG.email}</a>`;
 
   /* ---- Socials ---- */
   const socials = $('#socialList');
@@ -902,7 +939,7 @@ const ICONS = {
       <div class="price-desc">${pl.desc}</div>
       <div class="price-from">mulai dari</div>
       <div class="price-num">${pl.price}</div>
-      <div class="price-time">⏱ ${pl.time}</div>
+      <div class="price-time"><span class="ico" data-ico="clock"></span> ${pl.time}</div>
       <ul class="price-list">${pl.features.map(f => `<li>${ICONS.check}<span>${f}</span></li>`).join('')}</ul>
       <a class="btn ${pl.featured ? 'btn-primary' : 'btn-ghost'} btn-sm" href="${waLink('Halo Tarmizi, saya tertarik dengan paket "' + pl.name.replace(/&amp;/g, '&') + '". Boleh minta penawaran detailnya?')}" target="_blank" rel="noopener noreferrer">Minta Penawaran</a>
     `;
@@ -946,6 +983,11 @@ const ICONS = {
   tryImages(CONFIG.photoBg, 0, (src) => {
     $('#bgPhoto').style.backgroundImage = `url('${src}')`;
     document.body.classList.add('has-photo');
+  });
+
+  /* ---- Isi semua placeholder ikon (termasuk yang dirender dinamis) ---- */
+  document.querySelectorAll('.ico[data-ico]').forEach((el) => {
+    el.innerHTML = ICONS[el.dataset.ico] || '';
   });
 
   /* ---- Reveal on scroll ---- */
