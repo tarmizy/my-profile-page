@@ -1,20 +1,21 @@
 import CONFIG from '../shared/data';
 import { getWaLink } from '../shared/utils';
 import Icon from '../shared/Icon';
+import { MotionCard, MotionReveal } from '../shared/Motion';
 
 export default function MobilePricing() {
   return (
-    <section id="harga" style={{ padding: '50px 16px' }}>
-      <div className="section-head reveal">
+    <section id="harga" className="page-panel page-panel-pricing" style={{ padding: '50px 16px' }}>
+      <MotionReveal className="section-head">
         
         <h2 className="title">Investasi transparan</h2>
         <p className="subtitle">Harga mulai — penawaran final disesuaikan dan <b style={{ color: '#fff' }}>selalu saya sampaikan lengkap sebelum mulai</b>, tanpa biaya tersembunyi.</p>
-      </div>
+      </MotionReveal>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14, maxWidth: 420, margin: '0 auto' }}>
         {CONFIG.pricing.map((pl, i) => (
-          <div key={i} className={`card reveal${pl.featured ? '' : ''}`} style={{
-            padding: '22px 18px',
+          <MotionCard key={i} delay={i * 0.08} className={`card pricing-card${pl.featured ? ' pricing-featured' : ''}`} style={{
+            padding: '22px 18px', display: 'flex', flexDirection: 'column', minHeight: 470,
             position: 'relative',
             border: pl.featured ? '1px solid rgba(59,130,246,.55)' : undefined,
             boxShadow: pl.featured ? '0 0 0 1px rgba(59,130,246,.22) inset, 0 24px 60px -12px rgba(0,0,0,.65)' : undefined,
@@ -54,12 +55,12 @@ export default function MobilePricing() {
             >
               Minta Penawaran
             </a>
-          </div>
+          </MotionCard>
         ))}
       </div>
 
       {/* Add-ons */}
-      <div className="card reveal" style={{ padding: '18px 16px', maxWidth: 420, margin: '16px auto 0' }}>
+      <MotionCard className="card" style={{ padding: '18px 16px', maxWidth: 420, margin: '16px auto 0' }}>
         <h4 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: '.88rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 7, marginBottom: 12 }}>
           <Icon name="clock" size={15} /> Layanan tambahan
         </h4>
@@ -70,7 +71,7 @@ export default function MobilePricing() {
             </span>
           ))}
         </div>
-      </div>
+      </MotionCard>
 
       <p className="reveal" style={{ textAlign: 'center', marginTop: 20, fontSize: '.8rem', color: '#9ba3c4', lineHeight: 1.6, maxWidth: 380, margin: '20px auto 0' }}>
         Budget terbatas? Sistem bisa <b style={{ color: '#fff' }}>dibangun bertahap per modul</b> — mulai yang paling mendesak dulu.

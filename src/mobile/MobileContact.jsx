@@ -1,18 +1,19 @@
 import CONFIG from '../shared/data';
 import { getWaLink, getMailLink } from '../shared/utils';
 import Icon from '../shared/Icon';
+import { MotionCard } from '../shared/Motion';
 
 export default function MobileContact() {
   const waUrl = getWaLink();
 
   return (
-    <section id="kontak" style={{ padding: '50px 16px' }}>
-      <div className="card reveal" style={{ padding: '32px 20px', textAlign: 'center', maxWidth: 420, margin: '0 auto' }}>
+    <section id="kontak" className="page-panel page-panel-contact" style={{ padding: '50px 16px' }}>
+      <MotionCard className="card" style={{ padding: '32px 20px', textAlign: 'center', maxWidth: 420, margin: '0 auto' }}>
         <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: '1.25rem', fontWeight: 700 }}>
-          Masih catat data di buku atau Excel?
+          Siap bikin produk digital yang lebih berani?
         </h2>
         <p style={{ fontSize: '.85rem', color: '#9ba3c4', marginTop: 10, lineHeight: 1.6 }}>
-          Ceritakan cara kerja Anda — saya bantu jadi sistem digital yang rapi, aman, dan gampang dipakai. <b style={{ color: '#fff' }}>Konsultasi gratis, tanpa komitmen.</b>
+          Ceritakan visi atau kebutuhan Anda. Saya bantu ubah menjadi website Web3D, web app, atau mobile experience yang siap dipakai. <b style={{ color: '#fff' }}>Konsultasi awal gratis.</b>
         </p>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 22 }}>
@@ -51,7 +52,7 @@ export default function MobileContact() {
             {CONFIG.email}
           </a>
         </div>
-      </div>
+      </MotionCard>
 
       <footer style={{ textAlign: 'center', padding: '30px 0 80px', fontSize: '.72rem', color: 'rgba(155,163,196,.7)', lineHeight: 1.8 }}>
         © 2026 {CONFIG.name} · Web · Mobile · DevSecOps<br />

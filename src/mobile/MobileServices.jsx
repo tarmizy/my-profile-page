@@ -1,52 +1,13 @@
+import CONFIG from '../shared/data';
 import Icon from '../shared/Icon';
+import { MotionCard, MotionReveal } from '../shared/Motion';
 
 export default function MobileServices() {
   return (
-    <section id="layanan" style={{ padding: '50px 16px' }}>
-      <div className="section-head reveal">
-        
-        <h2 className="title">Apa yang saya kerjakan</h2>
-        <p className="subtitle">Dari rencana sampai sistem online dan dipakai tim Anda.</p>
-      </div>
-
+    <section id="layanan" className="page-panel page-panel-services" style={{ padding: '50px 16px' }}>
+      <MotionReveal className="section-head"><div className="eyebrow">CAPABILITY / 01</div><h2 className="title">Digital products yang terasa premium</h2><p className="subtitle">Web3D, aplikasi operasional, dan deployment dalam satu pengalaman digital yang utuh.</p></MotionReveal>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 420, margin: '0 auto' }}>
-        {[
-          {
-            icon: 'chart', title: 'Sistem Manajemen & Laporan',
-            desc: 'Aplikasi web kelola data harian — pelanggan, santri, tagihan, absensi — lengkap dashboard & laporan siap cetak.',
-            bullets: ['Dashboard real-time', 'Laporan & export', 'Multi-user & hak akses', 'Setup server, domain & hosting'],
-          },
-          {
-            icon: 'smartphone', title: 'Aplikasi Mobile',
-            desc: 'Biar admin, pengajar, atau wali bisa akses & input data langsung dari HP — tanpa perlu komputer.',
-            bullets: ['Android & iOS', 'Terhubung ke sistem web', 'Ringan & mudah dipakai'],
-          },
-          {
-            icon: 'shield', title: 'Keamanan Data',
-            desc: 'Keamanan dipasang dari awal — karena sistem Anda menyimpan data pribadi yang harus aman.',
-            bullets: ['Proteksi akses', 'Backup otomatis', 'Monitoring 24/7'],
-          },
-        ].map((s, i) => (
-          <div key={i} className="card reveal" style={{ padding: '22px 18px' }}>
-            <div style={{
-              width: 40, height: 40, borderRadius: 12, display: 'grid', placeItems: 'center',
-              background: 'rgba(59,130,246,.16)', border: '1px solid rgba(59,130,246,.35)',
-              marginBottom: 12,
-            }}>
-              <Icon name={s.icon} size={20} />
-            </div>
-            <h3 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: '1rem', fontWeight: 700, marginBottom: 6 }}>{s.title}</h3>
-            <p style={{ fontSize: '.82rem', color: '#9ba3c4', lineHeight: 1.6, marginBottom: 10 }}>{s.desc}</p>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 6 }}>
-              {s.bullets.map(b => (
-                <li key={b} style={{ fontSize: '.78rem', color: '#dfe4ff', display: 'flex', alignItems: 'center', gap: 7 }}>
-                  <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#6366f1', flexShrink: 0 }} />
-                  {b}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        {CONFIG.services.map((service, i) => <MotionCard key={service.title} delay={i * 0.07} className="card" style={{ padding: '22px 18px', borderTop: `2px solid ${['#4dd4ac', '#62a8ff', '#f6c453', '#f47aa7'][i]}` }}><div style={{ width: 40, height: 40, borderRadius: 12, display: 'grid', placeItems: 'center', background: 'rgba(255,255,255,.07)', border: '1px solid rgba(255,255,255,.12)', marginBottom: 12 }}><Icon name={service.icon} size={20} /></div><h3 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: '1rem', fontWeight: 700, marginBottom: 6 }}>{service.title}</h3><p style={{ fontSize: '.82rem', color: '#9ba3c4', lineHeight: 1.6, marginBottom: 10 }}>{service.desc}</p><ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 6 }}>{service.bullets.map(item => <li key={item} style={{ fontSize: '.78rem', color: '#dfe4ff', display: 'flex', alignItems: 'center', gap: 7 }}><span style={{ width: 5, height: 5, borderRadius: '50%', background: '#4dd4ac', flexShrink: 0 }} />{item}</li>)}</ul></MotionCard>)}
       </div>
     </section>
   );

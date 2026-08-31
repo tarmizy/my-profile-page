@@ -2,13 +2,16 @@ import { useState } from 'react';
 import CONFIG from '../shared/data';
 import { getWaLink } from '../shared/utils';
 import Icon from '../shared/Icon';
+import { AnimatePresence, motion } from 'framer-motion';
+import { MotionCard } from './Motion';
 
 export function PortfolioModal({ project, onClose }) {
   const waLink = getWaLink(`Halo Codday996 Solutions, saya tertarik dengan sistem seperti ${project.name}. Boleh diskusi?`);
 
   return (
-    <div
+    <motion.div
       onClick={onClose}
+      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
       style={{
         position: 'fixed', inset: 0, zIndex: 100,
         background: 'rgba(5,5,15,.85)',
@@ -18,8 +21,10 @@ export function PortfolioModal({ project, onClose }) {
         padding: 0,
       }}
     >
-      <div
+      <motion.div
         onClick={(e) => e.stopPropagation()}
+        initial={{ opacity: 0, y: 36 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 24 }}
+        transition={{ duration: .35, ease: [0.22, 1, 0.36, 1] }}
         style={{
           background: 'rgba(20,20,40,.95)',
           border: '1px solid rgba(255,255,255,.12)',
@@ -123,8 +128,8 @@ export function PortfolioModal({ project, onClose }) {
             <Icon name="wa" size={16} /> Saya mau sistem seperti ini
           </a>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -133,7 +138,7 @@ export default function PortfolioCards({ isMobile = true }) {
 
   return (
     <>
-      <div style={{
+      <div className="portfolio-stack" style={{
         display: 'grid',
         gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
         gap: isMobile ? 12 : 18,
@@ -141,12 +146,13 @@ export default function PortfolioCards({ isMobile = true }) {
         margin: '0 auto',
       }}>
         {CONFIG.projects.map((p, i) => (
-          <div key={i} className="card reveal" style={{
+          <MotionCard key={i} delay={i * 0.06} className="card" onClick={() => setSelected(p)} onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setSelected(p); } }} role="button" tabIndex={0} style={{
             padding: 0, overflow: 'hidden', cursor: 'pointer',
+            position: 'sticky', top: isMobile ? 76 : 94, zIndex: i + 1,
             transition: 'transform .25s, border-color .25s',
           }}>
             {/* Screenshot / fallback */}
-            <div style={{
+            <motion.div whileHover={{ scale: 1.025 }} transition={{ duration: .35 }} style={{
               aspectRatio: '16/10', background: '#0a0a1a',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               overflow: 'hidden', position: 'relative',
@@ -165,7 +171,7 @@ export default function PortfolioCards({ isMobile = true }) {
                   </div>
                 </div>
               )}
-            </div>
+            </motion.div>
 
             {/* Content */}
             <div style={{ padding: '16px 16px 18px' }}>
@@ -177,13 +183,14 @@ export default function PortfolioCards({ isMobile = true }) {
 
               <div style={{ display: 'flex', gap: 8 }}>
                 <button
-                  onClick={() => setSelected(p)}
+                  onClick={(event) => { event.stopPropagation(); setSelected(p); }}
                   className="btn btn-primary btn-sm"
                   style={{ flex: 1 }}
                 >
                   Lihat Detail
                 </button>
                 <a
+                  onClick={(event) => event.stopPropagation()}
                   className="btn btn-ghost btn-sm"
                   href={p.url} target="_blank" rel="noopener noreferrer"
                   style={{ flex: 1 }}
@@ -192,11 +199,11 @@ export default function PortfolioCards({ isMobile = true }) {
                 </a>
               </div>
             </div>
-          </div>
+          </MotionCard>
         ))}
       </div>
 
-      {selected && <PortfolioModal project={selected} onClose={() => setSelected(null)} />}
+      <AnimatePresence>{selected && <PortfolioModal project={selected} onClose={() => setSelected(null)} />}</AnimatePresence>
     </>
   );
 }

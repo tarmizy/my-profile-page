@@ -1,10 +1,14 @@
 import CONFIG from '../shared/data';
 import { getWaLink } from '../shared/utils';
 import Icon from '../shared/Icon';
+import Web3DShowcase from '../shared/Web3DShowcase';
+import { motion } from 'framer-motion';
 
 export default function MobileHero() {
   return (
-    <header style={{ padding: '40px 16px 30px', textAlign: 'center' }}>
+    <header className="hero-shell hero-shell-mobile">
+      <Web3DShowcase compact />
+      <motion.div className="hero-content" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .75, delay: .1, ease: [0.22, 1, 0.36, 1] }}>
       {/* Logo Section */}
       <div style={{ marginBottom: 20 }}>
         <img
@@ -93,6 +97,7 @@ export default function MobileHero() {
           </div>
         ))}
       </div>
+      </motion.div>
     </header>
   );
 }

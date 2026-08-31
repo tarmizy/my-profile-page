@@ -1,5 +1,5 @@
 import CONFIG from '../shared/data';
-import { getWaLink, getMailLink } from '../shared/utils';
+import { getWaLink } from '../shared/utils';
 import Icon from '../shared/Icon';
 
 export default function MobileNav() {

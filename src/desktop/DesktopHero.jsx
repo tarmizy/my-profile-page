@@ -1,13 +1,15 @@
 import CONFIG from '../shared/data';
 import { getWaLink } from '../shared/utils';
 import Icon from '../shared/Icon';
+import Web3DShowcase from '../shared/Web3DShowcase';
+import { motion } from 'framer-motion';
 
 export default function DesktopHero() {
   return (
-    <header style={{
-      maxWidth: 900, margin: '0 auto', padding: '80px 32px 60px',
-      textAlign: 'center',
-    }}>
+    <header className="hero-shell hero-shell-desktop">
+      <Web3DShowcase />
+      <div className="hero-glass-line" />
+      <motion.div className="hero-content" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .85, delay: .12, ease: [0.22, 1, 0.36, 1] }}>
       {/* Logo + Status row */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 20, marginBottom: 28 }}>
         <div style={{ position: 'relative' }}>
@@ -79,7 +81,7 @@ export default function DesktopHero() {
 
       {/* Pitch */}
       <p style={{ fontSize: '1.05rem', color: '#9ba3c4', lineHeight: 1.8, maxWidth: 650, margin: '0 auto 30px' }}>
-        Saya ubah catatan manual Anda — buku, Excel, kertas — jadi <b style={{ color: '#fff' }}>satu sistem digital</b>.
+        Saya ubah catatan manual Anda - buku, Excel, kertas - jadi <b style={{ color: '#fff' }}>satu sistem digital</b>.
         Lengkap dengan dashboard, laporan otomatis, dan bisa dibuka dari HP maupun komputer.
       </p>
 
@@ -115,6 +117,7 @@ export default function DesktopHero() {
         }
         @keyframes shineText { to { background-position: 200% center; } }
       `}</style>
+      </motion.div>
     </header>
   );
 }

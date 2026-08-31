@@ -1,6 +1,22 @@
 const CONFIG = {
+  services: [
+    { icon: "globe", title: "Website Interaktif Web3D", desc: "Website dengan motion, interaksi 3D, dan visual premium yang membuat brand terasa lebih modern.", bullets: ["Three.js & WebGL", "Interaksi ringan dan responsif", "Direction visual konsisten"] },
+    { icon: "chart", title: "Full-Stack Web App", desc: "Dashboard dan sistem operasional yang menyesuaikan alur kerja bisnis, lembaga, atau tim Anda.", bullets: ["Dashboard & role access", "API dan database", "Laporan dan export data"] },
+    { icon: "smartphone", title: "Mobile & PWA Experience", desc: "Pengalaman yang nyaman dipakai dari HP, bisa di-install, dan tetap terhubung ke sistem utama.", bullets: ["PWA installable", "Responsive by default", "Integrasi notifikasi dan API"] },
+    { icon: "shield", title: "DevSecOps & Deployment", desc: "Dari repository hingga production dengan deployment rapi, backup, keamanan, dan monitoring.", bullets: ["CI/CD dan environment", "Auth, hardening, backup", "Monitoring dan maintenance"] },
+  ],
+  techStack: [
+    { icon: "globe", title: "React + Vite", desc: "Fondasi UI cepat dan mudah dikembangkan." },
+    { icon: "chart", title: "Three.js / WebGL", desc: "Visual 3D interaktif untuk pengalaman premium." },
+    { icon: "smartphone", title: "PWA Ready", desc: "Akses nyaman lintas perangkat dan installable." },
+    { icon: "database", title: "API + Database", desc: "Data terstruktur, terhubung, dan siap tumbuh." },
+    { icon: "users", title: "Auth & Roles", desc: "Akses tiap pengguna disusun sesuai kebutuhan." },
+    { icon: "lock", title: "Security First", desc: "Proteksi dan validasi diperhatikan sejak awal." },
+    { icon: "search", title: "Deploy & Monitor", desc: "Rilis terukur dengan monitoring dasar." },
+    { icon: "training", title: "Handover", desc: "Dokumentasi dan training untuk tim." },
+  ],
   name: "Codday996 Solutions",
-  role: "Web Developer · Mobile Developer · DevSecOps",
+  role: "Web3D Developer | Full-Stack Web App | DevSecOps",
 
   whatsapp: "6282312255030",
   waMessage: "Halo Codday996 Solutions, saya tertarik dengan jasa pembuatan sistem/aplikasi Anda. Boleh diskusi kebutuhan project saya?",
@@ -13,6 +29,25 @@ const CONFIG = {
   ],
 
   projects: [
+    {
+      name: "Fishco",
+      tag: "Sistem Trading Ikan",
+      for: "Distributor ikan, supplier, dan operasional kurir",
+      shortDesc: "Satu dashboard untuk memantau order, penjualan, kurir, katalog, segmen pengiriman, dan status gelombang secara real-time.",
+      problem: "Order ikan, pengiriman, stok katalog, dan aktivitas kurir perlu dipantau cepat agar operasional harian tidak terlambat.",
+      solution: "Fishco menyatukan alur trading ikan dalam satu sistem: admin melihat ringkasan penjualan, kurir menerima tugas dari mobile, dan status gelombang pengiriman lebih mudah dikontrol.",
+      features: [
+        "Dashboard order dan nilai penjualan",
+        "Manajemen kurir dan pengiriman",
+        "Katalog produk dan supplier",
+        "Gelombang pengiriman per segmen",
+        "Aplikasi mobile untuk kurir",
+      ],
+      stack: ["Trading Ikan", "Dashboard Operasional", "Kurir Mobile", "Multi-Role"],
+      url: "https://fishco.pages.dev/",
+      accent: "#0f9f91",
+      shotDesktop: "/fishco-desktop.png", shotMobile: "/fishco-mobile.png",
+    },
     {
       name: "MDNet",
       tag: "Manajemen Pelanggan WiFi",
@@ -107,9 +142,9 @@ const CONFIG = {
 
   pricing: [
     {
-      name: "Profil Lembaga",
-      desc: "Website profil lengkap untuk sekolah, pesantren, atau bisnis Anda.",
-      price: "Rp 1.500.000",
+      name: "Web Presence",
+      desc: "Website profesional untuk memperkuat kredibilitas brand, lembaga, atau bisnis Anda.",
+      price: "Rp 2.500.000",
       time: "5–10 hari kerja",
       features: [
         "Multi-halaman (profil, program, galeri, kontak)",
@@ -120,9 +155,9 @@ const CONFIG = {
       ],
     },
     {
-      name: "Sistem Manajemen + Laporan",
-      desc: "Aplikasi web untuk kelola data operasional harian — semua jadi otomatis.",
-      price: "Rp 4.000.000",
+      name: "Web App Professional",
+      desc: "Aplikasi web custom untuk membuat proses operasional lebih cepat, rapi, dan terukur.",
+      price: "Rp 5.000.000",
       time: "3–6 minggu",
       featured: true,
       badge: "Paling Diminati",
@@ -137,9 +172,9 @@ const CONFIG = {
       ],
     },
     {
-      name: "Aplikasi Mobile / Custom",
-      desc: "Aplikasi Android/iOS atau sistem besar dengan alur kerja khusus.",
-      price: "Rp 8.000.000",
+      name: "Web3D / Mobile Custom",
+      desc: "Pengalaman Web3D, PWA, mobile, atau platform besar dengan kebutuhan khusus.",
+      price: "Rp 10.000.000",
       time: "Timeline sesuai skala",
       features: [
         "Semua fitur Sistem Manajemen",

@@ -1,21 +1,22 @@
 import CONFIG from '../shared/data';
 import { getWaLink } from '../shared/utils';
 import Icon from '../shared/Icon';
+import { MotionCard, MotionReveal } from '../shared/Motion';
 
 export default function DesktopPricing() {
   return (
-    <section id="harga" style={{ padding: '72px 32px' }}>
+    <section id="harga" className="page-panel page-panel-pricing" style={{ padding: '72px 32px' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-        <div className="section-head reveal">
+        <MotionReveal className="section-head">
           
           <h2 className="title">Investasi yang transparan sejak awal</h2>
           <p className="subtitle">Harga mulai — penawaran final menyesuaikan jumlah modul dan kerumitan, <b style={{ color: '#fff' }}>selalu disampaikan lengkap sebelum mulai</b>.</p>
-        </div>
+        </MotionReveal>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18, alignItems: 'start' }}>
+        <div className="pricing-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18, alignItems: 'stretch' }}>
           {CONFIG.pricing.map((pl, i) => (
-            <div key={i} className={`card reveal${pl.featured ? '' : ''}`} style={{
-              padding: '28px 24px', position: 'relative',
+            <MotionCard key={i} delay={i * 0.08} className={`card pricing-card${pl.featured ? ' pricing-featured' : ''}`} style={{
+              padding: '28px 24px', position: 'relative', display: 'flex', flexDirection: 'column',
               border: pl.featured ? '1px solid rgba(59,130,246,.55)' : undefined,
               boxShadow: pl.featured ? '0 0 0 1px rgba(59,130,246,.22) inset, 0 24px 60px -12px rgba(0,0,0,.65)' : undefined,
             }}>
@@ -55,12 +56,12 @@ export default function DesktopPricing() {
               >
                 Minta Penawaran
               </a>
-            </div>
+            </MotionCard>
           ))}
         </div>
 
         {/* Add-ons */}
-        <div className="card reveal" style={{ padding: '22px 24px', marginTop: 30 }}>
+        <MotionCard className="card" style={{ padding: '22px 24px', marginTop: 30 }}>
           <h4 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: '.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 9 }}>
             <Icon name="clock" size={16} /> Layanan tambahan
           </h4>
@@ -71,7 +72,7 @@ export default function DesktopPricing() {
               </span>
             ))}
           </div>
-        </div>
+        </MotionCard>
 
         <p className="reveal" style={{ textAlign: 'center', marginTop: 24, fontSize: '.84rem', color: '#9ba3c4', lineHeight: 1.7 }}>
           Budget terbatas? Sistem bisa <b style={{ color: '#fff' }}>dibangun bertahap per modul</b> — mulai dari yang paling mendesak dulu.
