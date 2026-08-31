@@ -7,7 +7,6 @@ export default function DesktopProcess() {
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <MotionReveal className="section-head">
           
-          <div className="eyebrow">WORKFLOW / 03</div>
           <h2 className="title">Dari ide ke produk yang siap dipakai</h2>
         </MotionReveal>
 

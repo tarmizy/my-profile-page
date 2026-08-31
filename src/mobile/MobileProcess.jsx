@@ -6,7 +6,7 @@ export default function MobileProcess() {
     <section id="proses" className="page-panel page-panel-process" style={{ padding: '50px 16px' }}>
       <MotionReveal className="section-head">
         
-        <div className="eyebrow">WORKFLOW / 03</div>
+        
         <h2 className="title">Dari ide ke produk siap dipakai</h2>
       </MotionReveal>
 

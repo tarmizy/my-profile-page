@@ -7,7 +7,6 @@ export default function DesktopServices() {
     <section id="layanan" className="page-panel page-panel-services" style={{ padding: '72px 32px' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <MotionReveal className="section-head">
-          <div className="eyebrow">CAPABILITY / 01</div>
           <h2 className="title">Digital products yang terasa premium</h2>
           <p className="subtitle">Web3D, aplikasi operasional, dan deployment yang dirancang sebagai satu pengalaman digital yang utuh.</p>
         </MotionReveal>
