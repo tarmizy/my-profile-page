@@ -8,6 +8,7 @@ import DesktopFeatures from './DesktopFeatures';
 import DesktopPricing from './DesktopPricing';
 import DesktopProcess from './DesktopProcess';
 import DesktopContact from './DesktopContact';
+import LiveChat from '../shared/LiveChat';
 
 export default function DesktopPage() {
   useReveal();
@@ -32,6 +33,7 @@ export default function DesktopPage() {
       <DesktopPricing />
       <DesktopProcess />
       <DesktopContact />
+      <LiveChat />
     </>
   );
 }

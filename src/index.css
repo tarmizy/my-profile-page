@@ -235,6 +235,15 @@ body {
 .btn-ghost { background: rgba(255,255,255,.06); border: 1px solid var(--border); color: var(--text); }
 .btn-ghost:hover { transform: translateY(-2px); background: rgba(255,255,255,.1); border-color: rgba(59,130,246,.4); }
 .btn-sm { padding: 10px 18px; font-size: .85rem; }
+.live-chat {
+  position: fixed; right: 22px; bottom: 22px; z-index: 60;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 54px; height: 54px; border-radius: 50%;
+  padding: 0;
+  color: #fff; background: #25d366; text-decoration: none;
+  font-size: .82rem; font-weight: 700;
+  box-shadow: 0 14px 34px -10px rgba(37,211,102,.75), 0 0 0 1px rgba(255,255,255,.18) inset;
+}
 
 /* Section */
 section {
@@ -295,4 +304,5 @@ h2.title { font-family: "Space Grotesk", sans-serif; font-size: clamp(1.5rem, 4.
   .portfolio-feature-copy { display: block; padding: 18px 17px 19px; }
   .portfolio-feature-description { max-width: none; margin-top: 12px; }
   .portfolio-feature-actions { margin-top: 16px; }
+  .live-chat { right: 14px; bottom: calc(14px + env(safe-area-inset-bottom)); width: 52px; height: 52px; }
 }
