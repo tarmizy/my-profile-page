@@ -104,17 +104,17 @@ function Hero() {
             <span className="studio-pill-dot" /> SOLUSI DIGITAL UNTUK BISNIS YANG TERUS BERGERAK
           </motion.div>
           <motion.h1 id="hero-title" initial={reduce ? false : { opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .75, delay: .1 }}>
-            Bisnis Anda punya potensi besar.<br /><span>Teknologinya</span> <em>kami bantu wujudkan.</em>
+            Bisnis Anda punya potensi besar.<br /><span>Teknologinya</span> <em>saya bantu wujudkan.</em>
           </motion.h1>
           <motion.p className="studio-hero-lead" initial={reduce ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .65, delay: .22 }}>
             Website, aplikasi bisnis, dan sistem operasional custom yang dirancang untuk membuat pekerjaan lebih ringkas dan pengalaman pelanggan lebih baik.
           </motion.p>
           <motion.div className="studio-hero-actions" initial={reduce ? false : { opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .3 }}>
             <a className="studio-btn studio-btn-dark" href="#estimasi">Hitung estimasi proyek <span className="studio-btn-arrow">↗</span></a>
-            <a className="studio-btn studio-btn-line" href="#karya">Lihat karya kami <span aria-hidden="true">→</span></a>
+            <a className="studio-btn studio-btn-line" href="#karya">Lihat hasil kerja <span aria-hidden="true">→</span></a>
           </motion.div>
           <div className="studio-hero-proof">
-            <div className="studio-proof-number"><strong>06<span>+</span></strong><span>contoh proyek<br />di portfolio</span></div>
+            <div className="studio-proof-number"><strong>06<span>.</span></strong><span>contoh proyek<br />di portfolio</span></div>
             <div className="studio-proof-separator" />
             <p><Icon name="check" size={17} /> Konsultasi tanpa biaya awal<br /><Icon name="check" size={17} /> Lihat karya dan demo sebelum diskusi</p>
           </div>
@@ -206,7 +206,7 @@ function Portfolio() {
               <div className="studio-stage-glow" aria-hidden="true" />
               <AnimatePresence mode="wait">
                 <motion.div className="studio-work-screen" key={project.name + device} initial={reduce ? false : { opacity: 0, y: 16, scale: .96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={reduce ? undefined : { opacity: 0, y: -8, scale: .98 }} transition={{ duration: .28 }}>
-                  <div className="studio-screen-bar"><span><i /><i /><i /></span><small>{project.name.toLowerCase().replaceAll(' ', '-')}.app</small></div>
+                  <div className="studio-screen-bar"><span><i /><i /><i /></span><small>PREVIEW • CODDAY996</small></div>
                   <img src={photo} alt={'Cuplikan tampilan ' + project.name + ' pada ' + (device === 'mobile' ? 'mobile' : 'desktop')} loading="lazy" />
                 </motion.div>
               </AnimatePresence>
@@ -233,7 +233,7 @@ function Approach() {
   return (
     <section className="studio-approach studio-section" id="proses">
       <div className="studio-shell">
-        <Reveal><SectionHeading eyebrow="03 — PROSES KERJA" title="Proses terarah." emphasis="Tanpa tebak-tebakan." description="Saya percaya pengalaman bekerja sama harus sama baiknya dengan produk yang dibuat." /></Reveal>
+        <Reveal><SectionHeading eyebrow="03 — PROSES KERJA" title="Proses terarah." emphasis="Tanpa tebak-tebakan." description="Pengalaman bekerja sama harus sama baiknya dengan produk yang dibuat." /></Reveal>
         <div className="studio-approach-grid">{steps.map((step, index) => (
           <Reveal key={step.no} delay={index * .07}><article className="studio-approach-step"><div className="studio-approach-number">{step.no}<span>↗</span></div><h3>{step.name}</h3><p>{step.desc}</p></article></Reveal>
         ))}</div>
