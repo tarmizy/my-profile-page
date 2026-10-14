@@ -120,8 +120,15 @@ function Hero() {
           </div>
         </div>
         <motion.div className="studio-hero-art" initial={reduce ? false : { opacity: 0, scale: .94, rotate: -2 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ duration: 1, delay: .12, ease: [0.22, 1, 0.36, 1] }}>
-          <img className="studio-hero-concept" src="/codday-idea-solution.svg" alt="Ilustrasi proses mengubah tantangan bisnis menjadi sistem digital yang lebih teratur" fetchPriority="high" />
-          <span className="studio-art-superscript">CODDAY — IDEAS INTO SOLUTIONS</span>
+          <div className="studio-hero-film" role="img" aria-label="Visual konsep Codday: dari proses bisnis yang rumit menuju solusi teknologi yang terstruktur">
+            {reduce ? (
+              <img src="/codday-hero-poster.webp" className="studio-hero-concept" alt="" fetchPriority="high" />
+            ) : (
+              <video className="studio-hero-concept" autoPlay muted loop playsInline preload="metadata" poster="/codday-hero-poster.webp" aria-hidden="true">
+                <source src="/codday-hero-loop.mp4" type="video/mp4" />
+              </video>
+            )}
+          </div>
           
 
         </motion.div>
