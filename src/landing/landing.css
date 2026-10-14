@@ -47,3 +47,8 @@
 /* Codday visual identity — hero artwork replaces the dashboard screenshot. */
 .studio-logo-image{width:40px;height:46px;object-fit:contain;flex-shrink:0}.studio-hero-art{background:#10291f;display:flex;align-items:center;justify-content:center}.studio-hero-concept{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit}.studio-hero-art .studio-art-superscript{display:none}.studio-footer .studio-logo-image{width:40px;height:46px}.studio-wordmark-type strong span{color:#83ab4c}
 @media(max-width:520px){.studio-logo-image{width:34px;height:39px}.studio-footer .studio-logo-image{width:34px;height:39px}.studio-hero-concept{object-fit:cover}}
+
+/* Video art direction: cinematic motion stays inside the hero frame. */
+.studio-hero-film{width:100%;height:100%;position:relative;overflow:hidden;border-radius:inherit;background:#10291f}
+.studio-hero-film .studio-hero-concept{display:block;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:inherit}
+@media(prefers-reduced-motion:reduce){.studio-hero-film video{display:none}}
