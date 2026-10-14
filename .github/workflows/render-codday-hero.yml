@@ -1,7 +1,7 @@
 name: Render Codday hero video assets (one-time)
 on:
-  push:
-    branches: [feat/premium-landing-estimator-20261014]
+  pull_request:
+    branches: [main]
     paths: ['.github/workflows/render-codday-hero.yml']
 permissions:
   contents: write
@@ -11,6 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: feat/premium-landing-estimator-20261014
           persist-credentials: true
       - name: Install video tools
         run: |
