@@ -119,19 +119,17 @@ function Hero() {
             <p><Icon name="check" size={17} /> Konsultasi tanpa biaya awal<br /><Icon name="check" size={17} /> Lihat karya dan demo sebelum diskusi</p>
           </div>
         </div>
-        <motion.div className="studio-hero-art" initial={reduce ? false : { opacity: 0, scale: .94, rotate: -2 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ duration: 1, delay: .12, ease: [0.22, 1, 0.36, 1] }}>
-          <div className="studio-hero-film" role="img" aria-label="Visual konsep Codday: dari proses bisnis yang rumit menuju solusi teknologi yang terstruktur">
-            {reduce ? (
-              <img src="/codday-hero-poster.webp" className="studio-hero-concept" alt="" fetchPriority="high" />
-            ) : (
-              <video className="studio-hero-concept" autoPlay muted loop playsInline preload="metadata" poster="/codday-hero-poster.webp" aria-hidden="true">
-                <source src="/codday-hero-loop.mp4" type="video/mp4" />
-              </video>
-            )}
-          </div>
-          
-
-        </motion.div>
+        <figure className="studio-hero-art">
+          <img
+            className="studio-hero-concept"
+            src="/codday-hero-poster.webp"
+            width="800"
+            height="800"
+            fetchPriority="high"
+            decoding="async"
+            alt="Ilustrasi Codday: proses manual dan data yang terpisah diubah menjadi strategi, aplikasi custom, otomatisasi, dan pertumbuhan bisnis."
+          />
+        </figure>
       </div>
       <div className="studio-shell studio-hero-meta"><span>INDEPENDENT DIGITAL DEVELOPMENT STUDIO</span><span>BASED IN INDONESIA • AVAILABLE ONLINE</span></div>
     </section>
