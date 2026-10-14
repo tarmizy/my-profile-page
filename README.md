@@ -1,10 +1,10 @@
-# Codday996 Solutions — Premium Digital Studio
+# codday Digital Solutions — Premium Digital Studio
 
 Landing page jasa website, web app, dashboard, dan aplikasi custom untuk bisnis berkembang. Dibuat menggunakan React 19, Vite 8, Framer Motion, dan PWA.
 
 ## Apa yang ada di halaman
 
-- Editorial hero, visual produk asli, tipografi Manrope + Instrument Serif, palet off-white/forest/lime.
+- Hero statis dengan artwork idea-to-solution pilihan pemilik brand (tidak menggunakan video/autoplay), tipografi Manrope + Instrument Serif, palet off-white/forest/lime.
 - Desktop navbar dan **floating bottom navbar mobile dengan 5 menu berlabel** — tidak memakai hamburger.
 - Animasi ringan CSS dan Framer Motion dengan dukungan `prefers-reduced-motion`.
 - Layanan, portfolio interaktif 6 proyek dengan tombol demo dan toggle screenshot desktop/mobile bila tersedia.
@@ -38,4 +38,8 @@ Review kode dan tes GitHub Actions akan berjalan otomatis pada PR. Sesudah merge
 
 ## Catatan
 
-Aset showcase adalah screenshot proyek milik repo yang sudah ada. Tidak ada testimoni, logo klien, klaim metrik, atau angka omzet yang dibuat-buat. Referensi desain: UI/UX Pro Max dan 21st.dev, dibuat ulang khusus untuk brand ini tanpa menyalin komponen berlisensi secara langsung.
+Artwork hero adalah visual konsep Codday yang dipilih pemilik brand; showcase portfolio memakai screenshot proyek asli yang sudah ada. Tidak ada testimoni, logo klien, klaim metrik, atau angka omzet yang dibuat-buat. Referensi desain: UI/UX Pro Max dan 21st.dev, dibuat ulang khusus untuk brand ini tanpa menyalin komponen berlisensi secara langsung.
+
+### Hero final
+
+Memakai `/codday-hero-poster.webp` (gambar konsep problem → solution yang disetujui). Tidak ada video, autoplay, atau gerakan pada artwork hero. Semua sisi gambar terlihat di mobile dan desktop tanpa pemotongan (`aspect-ratio:1/1`, `object-fit:contain`).
