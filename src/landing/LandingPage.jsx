@@ -190,6 +190,18 @@ function Portfolio() {
             {CONFIG.projects.map((item, index) => (
               <button id={'studio-project-tab-' + index} key={item.name} type="button" role="tab" aria-selected={selected === index}
                 aria-controls="studio-project-panel" tabIndex={selected === index ? 0 : -1} onClick={() => selectProject(index)}
+                onKeyDown={(event) => {
+                  let next = null;
+                  if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = (index + 1) % CONFIG.projects.length;
+                  if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next = (index - 1 + CONFIG.projects.length) % CONFIG.projects.length;
+                  if (event.key === 'Home') next = 0;
+                  if (event.key === 'End') next = CONFIG.projects.length - 1;
+                  if (next !== null) {
+                    event.preventDefault();
+                    selectProject(next);
+                    event.currentTarget.parentElement.querySelectorAll('[role="tab"]')[next]?.focus();
+                  }
+                }}
                 className={'studio-work-tab' + (selected === index ? ' is-active' : '')}>
                 <span className="studio-work-index">{String(index + 1).padStart(2, '0')}</span>
                 <span className="studio-work-tab-copy"><strong>{item.name}</strong><small>{item.tag}</small></span>
@@ -293,5 +305,5 @@ function Contact() {
 }
 
 export default function LandingPage() {
-  return <><Navigation /><main><Hero /><Marquee /><Services /><Portfolio /><Approach /><Estimator /><FAQs /><Contact /></main></>;
+  return <><a className="studio-skip-link" href="#main-content">Lewati navigasi</a><Navigation /><main id="main-content"><Hero /><Marquee /><Services /><Portfolio /><Approach /><Estimator /><FAQs /><Contact /></main></>;
 }
