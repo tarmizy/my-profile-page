@@ -10,10 +10,10 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['logo.png', 'favicon.svg'],
+      includeAssets: ['codday-mark.svg', 'codday-idea-solution.svg'],
       manifest: {
-        name: 'Codday996 Solutions — Sistem Manajemen Digital',
-        short_name: 'Codday996 Solutions',
+        name: 'codday Digital Solutions — Sistem Manajemen Digital',
+        short_name: 'codday Digital Solutions',
         description: 'Sistem manajemen berbasis web & mobile — lengkap dashboard & laporan',
         theme_color: '#0b211b',
         background_color: '#0b211b',
@@ -21,8 +21,8 @@ export default defineConfig({
         orientation: 'any',
         start_url: '/',
         icons: [
-          { src: 'logo.png', sizes: '192x192', type: 'image/png' },
-          { src: 'logo.png', sizes: '512x512', type: 'image/png' },
+          { src: 'codday-mark.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
+          { src: 'codday-mark.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'maskable' },
         ],
       },
       workbox: {
