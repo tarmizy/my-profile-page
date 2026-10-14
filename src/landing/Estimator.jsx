@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import Icon from '../shared/Icon';
 import { getWaLink } from '../shared/utils';
 import {
@@ -12,112 +13,100 @@ export default function Estimator() {
   const [features, setFeatures] = useState([]);
   const [rush, setRush] = useState(false);
   const [notes, setNotes] = useState('');
-  const estimate = useMemo(
-    () => calculateEstimate({ type, complexity, features, rush }),
-    [type, complexity, features, rush],
-  );
-
-  const toggleFeature = (id) => {
-    setFeatures((current) => current.includes(id)
-      ? current.filter((item) => item !== id)
-      : [...current, id]);
-  };
-
-  const reset = () => {
-    setType('webapp');
-    setComplexity('basic');
-    setFeatures([]);
-    setRush(false);
-    setNotes('');
-  };
-
-  const waLink = getWaLink(createEstimateMessage(estimate, notes));
+  const reduce = useReducedMotion();
+  const estimate = useMemo(() => calculateEstimate({ type, complexity, features, rush }),
+    [type, complexity, features, rush]);
+  const toggle = (id) => setFeatures(items => items.includes(id)
+    ? items.filter(item => item !== id) : [...items, id]);
+  const reset = () => { setType('webapp'); setComplexity('basic'); setFeatures([]); setRush(false); setNotes(''); };
+  const message = createEstimateMessage(estimate, notes);
 
   return (
-    <section className="section estimate-section" id="kalkulator" aria-labelledby="estimate-title">
-      <div className="container">
-        <div className="section-heading estimate-heading">
-          <div>
-            <span className="eyebrow"><span className="eyebrow-line" /> SIMULASI BIAYA PROJECT</span>
-            <h2 id="estimate-title">Hitung gambaran budget <em>tanpa menunggu balasan.</em></h2>
+    <section className="studio-estimator studio-section" id="estimasi" aria-labelledby="estimate-title">
+      <div className="studio-shell">
+        <div className="studio-section-heading studio-estimator-title">
+          <div><p className="studio-kicker"><span className="studio-kicker-line" /> 04 — PROJECT ESTIMATOR</p>
+            <h2 id="estimate-title">Budget lebih jelas, <em>sebelum mulai.</em></h2>
           </div>
-          <p>Pilih jenis aplikasi dan kebutuhan Anda. Rinciannya otomatis berubah, lalu kirim ke WhatsApp untuk diskusi lebih lanjut.</p>
+          <p className="studio-section-intro">Tak perlu menebak-nebak. Pilih kebutuhan proyek untuk melihat rentang biaya dan waktu secara langsung.</p>
         </div>
-
-        <div className="estimator-grid">
-          <div className="estimator-builder">
-            <div className="builder-heading"><span className="step-index">01</span><div><h3>Jenis proyek</h3><p>Apa yang ingin Anda bangun?</p></div></div>
-            <div className="type-grid" role="group" aria-label="Pilih jenis proyek">
-              {PROJECT_TYPES.map(item => (
-                <button key={item.id} type="button" className={'option-card' + (type === item.id ? ' is-selected' : '')} aria-pressed={type === item.id} onClick={() => setType(item.id)}>
-                  <span className="option-icon"><Icon name={item.icon} size={22} /></span>
-                  <strong>{item.name}</strong>
-                  <span>{item.caption}</span>
-                  <small>Mulai {money(item.base)}</small>
-                </button>
-              ))}
-            </div>
-
-            <div className="builder-heading"><span className="step-index">02</span><div><h3>Skala kebutuhan</h3><p>Seberapa luas sistem yang dibutuhkan?</p></div></div>
-            <div className="scope-grid" role="group" aria-label="Pilih skala proyek">
-              {COMPLEXITIES.map(item => (
-                <button key={item.id} type="button" className={'scope-card' + (complexity === item.id ? ' is-selected' : '')} aria-pressed={complexity === item.id} onClick={() => setComplexity(item.id)}>
-                  <span className="radio-dot" aria-hidden="true" />
-                  <strong>{item.name}</strong>
-                  <small>{item.caption}</small>
-                </button>
-              ))}
-            </div>
-
-            <div className="builder-heading"><span className="step-index">03</span><div><h3>Fitur tambahan</h3><p>Centang sesuai kebutuhan. Boleh lebih dari satu.</p></div></div>
-            <div className="features-grid">
-              {ESTIMATE_FEATURES.map(item => (
-                <label key={item.id} className={'feature-option' + (features.includes(item.id) ? ' is-selected' : '')}>
-                  <input type="checkbox" checked={features.includes(item.id)} onChange={() => toggleFeature(item.id)} />
-                  <span className="fake-checkbox"><Icon name="check" size={13} /></span>
-                  <span className="feature-text"><strong>{item.name}</strong><small>+ {money(item.price)}</small></span>
-                </label>
-              ))}
-            </div>
-
-            <label className="rush-option">
-              <input type="checkbox" checked={rush} onChange={(event) => setRush(event.target.checked)} />
-              <span className="fake-checkbox"><Icon name="check" size={13} /></span>
-              <span><strong>Prioritas pengerjaan</strong><small>Percepatan jadwal jika kapasitas tersedia (+20% simulasi)</small></span>
+        <div className="studio-calculator">
+          <div className="studio-calculator-form">
+            <div className="studio-calc-intro"><span>PROJECT CONFIGURATOR</span><span>01 — 03</span></div>
+            <fieldset className="studio-calc-fieldset">
+              <legend><span>01</span> Pilih jenis proyek</legend>
+              <p>Fondasi utama sistem yang ingin Anda bangun.</p>
+              <div className="studio-calc-types">
+                {PROJECT_TYPES.map(item => (
+                  <button type="button" key={item.id} aria-pressed={type === item.id}
+                    className={'studio-calc-type' + (type === item.id ? ' selected' : '')} onClick={() => setType(item.id)}>
+                    <span className="studio-calc-icon"><Icon name={item.icon} size={22} /></span>
+                    <strong>{item.name}</strong><small>{item.caption}</small>
+                    <span className="studio-calc-check" aria-hidden="true"><Icon name="check" size={13} /></span>
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+            <fieldset className="studio-calc-fieldset">
+              <legend><span>02</span> Skala pengerjaan</legend>
+              <p>Seberapa besar dan mendalam kebutuhannya?</p>
+              <div className="studio-calc-complexity">
+                {COMPLEXITIES.map(item => (
+                  <button type="button" key={item.id} aria-pressed={complexity === item.id}
+                    className={'studio-calc-scale' + (complexity === item.id ? ' selected' : '')} onClick={() => setComplexity(item.id)}>
+                    <span className="studio-calc-radio" aria-hidden="true" />
+                    <strong>{item.name}</strong><small>{item.caption}</small>
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+            <fieldset className="studio-calc-fieldset">
+              <legend><span>03</span> Fitur tambahan</legend>
+              <p>Tambahkan fitur sesuai kebutuhan bisnis Anda.</p>
+              <div className="studio-calc-features">
+                {ESTIMATE_FEATURES.map(item => (
+                  <label className={'studio-calc-feature' + (features.includes(item.id) ? ' selected' : '')} key={item.id}>
+                    <input type="checkbox" checked={features.includes(item.id)} onChange={() => toggle(item.id)} />
+                    <span className="studio-calc-checkbox" aria-hidden="true"><Icon name="check" size={13} /></span>
+                    <span><strong>{item.name}</strong><small>+ {money(item.price)}</small></span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <label className="studio-calc-rush">
+              <input type="checkbox" checked={rush} onChange={event => setRush(event.target.checked)} />
+              <span className="studio-calc-checkbox" aria-hidden="true"><Icon name="check" size={13} /></span>
+              <span><strong>Prioritas pengerjaan</strong><small>Jika jadwal memungkinkan, biaya percepatan simulasi +20%</small></span>
             </label>
-
-            <div className="builder-footer">
-              <label htmlFor="project-brief">Ceritakan kebutuhan Anda <span>(opsional)</span></label>
-              <textarea id="project-brief" rows="3" maxLength="600" value={notes} onChange={(event) => setNotes(event.target.value)} placeholder="Contoh: Sistem stok dan penjualan untuk 2 cabang, ada laporan bulanan..." />
-              <button type="button" className="text-button" onClick={reset}>↺ Ulangi pilihan</button>
+            <div className="studio-calc-notes">
+              <label htmlFor="studio-project-notes">Ada detail proyek? <small>(opsional)</small></label>
+              <textarea id="studio-project-notes" value={notes} onChange={event => setNotes(event.target.value)} rows="3" maxLength="600" placeholder="Contoh: dashboard stok 2 cabang dengan laporan penjualan bulanan..." />
+              <button className="studio-calc-reset" type="button" onClick={reset}>↺ Mulai ulang</button>
             </div>
           </div>
-
-          <aside className="estimate-result" aria-label="Hasil perhitungan estimasi">
-            <div className="estimate-result-inner">
-              <div className="result-topline"><span><span className="result-pulse" /> ESTIMASI REAL-TIME</span><Icon name="chart" size={19} /></div>
-              <p className="result-kicker">Rentang investasi awal</p>
-              <div className="result-price" aria-live="polite" aria-atomic="true">
-                <strong>{money(estimate.min)}</strong>
-                <span>hingga {money(estimate.max)}</span>
-              </div>
-              <p className="result-explainer">Perkiraan, bukan harga final. Penawaran resmi dibuat setelah scope disepakati.</p>
-              <div className="result-divider" />
-              <h3>Rincian simulasi</h3>
-              <dl className="result-breakdown">
-                <div><dt>{estimate.project.name}</dt><dd>{money(estimate.project.base)}</dd></div>
-                <div><dt>Penyesuaian skala ({estimate.scope.name})</dt><dd>{money(estimate.scopeFee)}</dd></div>
-                <div><dt>Fitur tambahan ({estimate.chosenFeatures.length})</dt><dd>{money(estimate.featuresFee)}</dd></div>
-                {rush && <div><dt>Prioritas pengerjaan</dt><dd>{money(estimate.rushFee)}</dd></div>}
-              </dl>
-              <div className="result-subtotal"><span>Nilai tengah simulasi</span><strong>{money(estimate.total)}</strong></div>
-              <div className="result-timeline"><Icon name="clock" size={18} /><span>Estimasi pengerjaan</span><strong>{estimate.durationMin}–{estimate.durationMax} minggu</strong></div>
-              <a className="button button-primary result-cta" href={waLink} target="_blank" rel="noopener noreferrer">
-                <Icon name="wa" size={18} /> Diskusikan estimasi ini <span aria-hidden="true">↗</span>
-              </a>
-              <p className="result-note">Rincian pilihan ikut terkirim ke WhatsApp. Belum termasuk biaya domain, hosting, layanan pihak ketiga, dan pajak jika berlaku.</p>
-              <div className="result-bottom"><Icon name="shield" size={16} /> Tidak perlu daftar akun atau mengisi data pribadi.</div>
+          <aside className="studio-quote" aria-label="Ringkasan estimasi">
+            <div className="studio-quote-top"><span><i /> ESTIMASI LANGSUNG</span><Icon name="chart" size={20} /></div>
+            <p className="studio-quote-label">Perkiraan investasi awal</p>
+            <div className="studio-quote-price" aria-live="polite" aria-atomic="true">
+              <motion.strong key={estimate.min} initial={reduce ? false : { opacity: .5, y: 7 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .2 }}>{money(estimate.min)}</motion.strong>
+              <span>— {money(estimate.max)}</span>
             </div>
+            <p className="studio-quote-hint">Simulasi untuk membantu perencanaan. Bukan penawaran harga final.</p>
+            <div className="studio-quote-divider" />
+            <h3>Rincian perkiraan</h3>
+            <dl className="studio-quote-breakdown">
+              <div><dt>Harga dasar · {estimate.project.name}</dt><dd>{money(estimate.project.base)}</dd></div>
+              <div><dt>Skala · {estimate.scope.name}</dt><dd>{money(estimate.scopeFee)}</dd></div>
+              <div><dt>Fitur tambahan ({estimate.chosenFeatures.length})</dt><dd>{money(estimate.featuresFee)}</dd></div>
+              {rush && <div><dt>Prioritas</dt><dd>{money(estimate.rushFee)}</dd></div>}
+            </dl>
+            <div className="studio-quote-total"><span>Nilai tengah simulasi</span><strong>{money(estimate.total)}</strong></div>
+            <div className="studio-quote-duration"><Icon name="clock" size={19} /><span>Estimasi durasi</span><strong>{estimate.durationMin}–{estimate.durationMax} minggu</strong></div>
+            <a className="studio-btn studio-quote-cta" href={getWaLink(message)} target="_blank" rel="noopener noreferrer">
+              <Icon name="wa" size={19} /> Diskusikan estimasi <span>↗</span>
+            </a>
+            <p className="studio-quote-small">Rincian pilihan Anda ikut terkirim ke WhatsApp. Belum termasuk hosting, domain, biaya pihak ketiga, dan pajak jika berlaku.</p>
+            <p className="studio-quote-security"><Icon name="shield" size={15} /> Tidak perlu akun. Tidak ada biaya untuk menghitung.</p>
           </aside>
         </div>
       </div>

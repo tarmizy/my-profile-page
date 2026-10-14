@@ -10,25 +10,25 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['logo.png', 'favicon.svg'],
+      includeAssets: ['codday-mark.svg', 'codday-hero-poster.webp'],
       manifest: {
-        name: 'Codday996 Solutions — Sistem Manajemen Digital',
-        short_name: 'Codday996 Solutions',
+        name: 'codday Digital Solutions — Sistem Manajemen Digital',
+        short_name: 'codday Digital Solutions',
         description: 'Sistem manajemen berbasis web & mobile — lengkap dashboard & laporan',
-        theme_color: '#05050f',
-        background_color: '#05050f',
+        theme_color: '#0b211b',
+        background_color: '#0b211b',
         display: 'standalone',
         orientation: 'any',
         start_url: '/',
         icons: [
-          { src: 'logo.png', sizes: '192x192', type: 'image/png' },
-          { src: 'logo.png', sizes: '512x512', type: 'image/png' },
+          { src: 'codday-mark.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
+          { src: 'codday-mark.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'maskable' },
         ],
       },
       workbox: {
-        maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
-        globIgnores: ['**/video-background.mp4'],
+        maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,woff2}'],
+        globIgnores: ['**/video-background.mp4', '**/*-desktop.png', '**/*-mobile.png', '**/Makeup-desktop.png'],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,

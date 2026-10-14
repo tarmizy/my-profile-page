@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 266 306" role="img" aria-label="Simbol codday">
+<defs><linearGradient id="lime" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d2e969"/><stop offset="1" stop-color="#a4ca36"/></linearGradient></defs>
+<g fill="#10291f"><path d="M257 141 252 158 239 173 188 208 171 224 165 241 165 298 238 239 250 226 257 205Z"/><path d="M232 97 185 73 172 72 165 75 85 126 80 137 80 189Z"/><path d="M144 7 57 59 29 78 15 96 9 118 9 198 13 213 19 224 36 240 142 298 144 298 143 254 67 211 55 199 52 190 52 125 56 114 65 104 133 58 139 52 144 40Z"/></g>
+<path fill="url(#lime)" d="M250 106 245 107 172 159 166 173 166 201 178 208 180 214 239 172 251 158 257 140 257 119 254 110Z"/>
+</svg>

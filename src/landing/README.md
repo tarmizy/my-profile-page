@@ -1,30 +1,27 @@
-# Landing Page & Kalkulator Estimasi
+# Landing Page — Codday996
 
-Halaman baru menggunakan `LandingPage.jsx`, `Estimator.jsx`, dan `landing.css`. Dibangun dengan React yang sudah tersedia di repo, tanpa dependency baru.
+UI dibangun ulang untuk menarik calon klien bisnis menengah dengan sistem visual editorial, fokus pada bukti karya dan konversi yang ramah di HP.
 
-## Mengatur harga
+- `LandingPage.jsx`: hero gambar statis, dock, services, portfolio preview, proses kerja, FAQ, kontak.
+- `Estimator.jsx`: kalkulator terhubung ke `shared/estimate.js` dan WhatsApp.
+- `landing.css`: token dan komposisi visual premium; breakpoint 1120 / 860 / 520.
 
-Ubah `src/shared/estimate.js`:
+## Referensi desain
 
-- `PROJECT_TYPES`: harga dasar dan rentang waktu per jenis proyek.
-- `COMPLEXITIES`: pengali harga berdasarkan skala proyek.
-- `ESTIMATE_FEATURES`: biaya fitur tambahan.
-- `calculateEstimate`: dasar perhitungan biaya fitur, biaya prioritas (+20%), rentang ±, dan waktu pengerjaan.
+- UI/UX Pro Max: https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
+- 21st.dev animated heroes: https://21st.dev/community/components/s/animated-hero
+- 21st.dev mobile navigation: https://21st.dev/community/components/explore/navigation-bar-ui-design
+- Design decisions: `design-system/codday996/MASTER.md`
 
-Harga yang muncul adalah **estimasi simulasi**, bukan penawaran mengikat. Biaya domain/hosting, layanan pihak ketiga, dan pajak (jika berlaku) belum termasuk.
+Visual dan interaksi dibuat sebagai implementasi orisinal React + CSS yang menyesuaikan kebutuhan repo, tanpa menambah dependensi besar.
 
-## Konversi & informasi bisnis
+## Checklist
 
-- Semua tautan WhatsApp memakai nomor dan pesan dari `src/shared/data.js`.
-- Kalkulator mengirim ringkasan jenis proyek, skala, fitur, prioritas, rentang biaya, perkiraan durasi, dan catatan (jika diisi) ke WhatsApp.
-- Enam proyek portofolio mengambil informasi dan screenshot dari `src/shared/data.js` dan folder `public/`.
-- FAQ sengaja tidak memuat testimoni atau metrik palsu. Sertakan ulasan asli hanya dengan persetujuan klien.
+- Jalankan `npm ci`, `npm run lint`, `node --test tests/estimate.test.js`, `npm run build`.
+- Uji 320px, 375px, 430px, 768px, 1024px, 1440px; mode landscape, keyboard, dan reduced motion.
+- Pastikan semua tautan demo dan kontak masih valid sebelum merge.
+- Verifikasi harga dasar, biaya fitur, dan durasi kalkulator sebelum menjadi halaman publik.
 
-## Checklist sebelum live
+### Hero final
 
-1. Tinjau harga, kategori, rentang durasi, dan biaya tambahan.
-2. Pastikan nomor WhatsApp, email, link portfolio, dan demo masih valid.
-3. Jalankan `npm ci`, `npm run build`, dan `npm run lint` secara lokal / CI.
-4. Uji kalkulator dan tombol WhatsApp di Android/iOS serta desktop.
-5. Uji mobile menu, FAQ, serta tampilan pada layar 320px sampai desktop lebar.
-6. Setelah PR direview, merge ke `main` untuk menjalankan proses deploy yang telah dikonfigurasi.
+Memakai `/codday-hero-poster.webp` (gambar konsep problem → solution yang disetujui). Tidak ada video, autoplay, atau gerakan pada artwork hero. Semua sisi gambar terlihat di mobile dan desktop tanpa pemotongan (`aspect-ratio:1/1`, `object-fit:contain`).

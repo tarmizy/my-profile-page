@@ -15,11 +15,11 @@ const CONFIG = {
     { icon: "search", title: "Deploy & Monitor", desc: "Rilis terukur dengan monitoring dasar." },
     { icon: "training", title: "Handover", desc: "Dokumentasi dan training untuk tim." },
   ],
-  name: "Codday996 Solutions",
+  name: "codday Digital Solutions",
   role: "Web3D Developer | Full-Stack Web App | DevSecOps",
 
   whatsapp: "6282312255030",
-  waMessage: "Halo Codday996 Solutions, saya tertarik dengan jasa pembuatan sistem/aplikasi Anda. Boleh diskusi kebutuhan project saya?",
+  waMessage: "Halo codday Digital Solutions, saya tertarik dengan jasa pembuatan sistem/aplikasi Anda. Boleh diskusi kebutuhan project saya?",
   email: "tarmizy.harsha@gmail.com",
 
   socials: [
