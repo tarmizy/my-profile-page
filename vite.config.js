@@ -10,7 +10,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['codday-mark.svg', 'codday-idea-solution.svg'],
+      includeAssets: ['codday-mark.svg', 'codday-hero-poster.webp'],
       manifest: {
         name: 'codday Digital Solutions — Sistem Manajemen Digital',
         short_name: 'codday Digital Solutions',
@@ -40,3 +40,7 @@ export default defineConfig({
     }),
   ],
 })
+
+### Hero final
+
+Memakai `/codday-hero-poster.webp` (gambar konsep problem → solution yang disetujui). Tidak ada video, autoplay, atau gerakan pada artwork hero. Semua sisi gambar terlihat di mobile dan desktop tanpa pemotongan (`aspect-ratio:1/1`, `object-fit:contain`).
