@@ -27,7 +27,7 @@ export default defineConfig({
       },
       workbox: {
         maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,woff2}'],
         globIgnores: ['**/video-background.mp4', '**/*-desktop.png', '**/*-mobile.png', '**/Makeup-desktop.png'],
         runtimeCaching: [
           {
