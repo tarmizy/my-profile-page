@@ -21,3 +21,25 @@
 
 /* Accessible interaction sizing for all touch destinations */
 .studio-device-controls button{min-height:44px}.studio-header-cta{min-height:44px}.studio-work-open{min-width:44px;min-height:44px}.studio-service-link{min-height:44px}.studio-text-link{min-height:44px}.studio-calc-reset{min-height:44px}.studio-work-list{overscroll-behavior-inline:contain}.studio-quote-price{font-variant-numeric:tabular-nums}
+
+/* Finishing pass: keyboard access, phone legibility and iOS textarea zoom prevention. */
+.studio-skip-link{position:fixed;top:-100px;left:16px;z-index:300;background:var(--lime);color:var(--forest);padding:14px 19px;border-radius:0 0 10px 10px;font-weight:900;font-size:14px}
+.studio-skip-link:focus{top:0}
+@media(max-width:860px){
+  .studio-calc-notes textarea{font-size:16px}
+  .studio-mobile-dock a{font-size:10px}
+  .studio-quote-breakdown>div{font-size:12px}
+  .studio-quote-hint,.studio-quote-small{font-size:12px}
+  .studio-calc-feature strong,.studio-calc-rush strong{font-size:12px}
+  .studio-calc-feature small,.studio-calc-rush small{font-size:11px}
+}
+@media(max-width:520px){
+  .studio-hero-lead{font-size:15px}
+  .studio-section-intro{font-size:14px}
+  .studio-service-description{font-size:14px}
+  .studio-work-feature-bottom p{font-size:13px}
+  .studio-approach-step p{font-size:12.5px}
+  .studio-faq-answer p{font-size:13.5px}
+  .studio-contact-panel>p:not(.studio-contact-kicker){font-size:14px}
+  .studio-faq-left>p:not(.studio-kicker){font-size:14px}
+}
