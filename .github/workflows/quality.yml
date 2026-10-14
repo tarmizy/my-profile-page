@@ -26,5 +26,8 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Estimator unit tests
+        run: node --test tests/estimate.test.js
+
       - name: Production build
         run: npm run build
