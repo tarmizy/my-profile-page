@@ -1,108 +1,297 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import CONFIG from '../shared/data';
 import Icon from '../shared/Icon';
-import { getWaLink, getMailLink } from '../shared/utils';
+import { getMailLink, getWaLink } from '../shared/utils';
 import Estimator from './Estimator';
 
 const NAV = [
-  ['Layanan', 'layanan'], ['Portfolio', 'portfolio'], ['Cara Kerja', 'proses'],
-  ['Estimasi Biaya', 'kalkulator'], ['FAQ', 'faq'],
+  { id: 'beranda', title: 'Beranda', icon: 'globe' },
+  { id: 'layanan', title: 'Layanan', icon: 'chart' },
+  { id: 'karya', title: 'Karya', icon: 'monitor' },
+  { id: 'estimasi', title: 'Estimasi', icon: 'report' },
+  { id: 'kontak', title: 'Kontak', icon: 'mail' },
 ];
 
-const QUESTIONS = [
-  { q: 'Apakah konsultasi awal berbayar?', a: 'Tidak. Anda dapat menjelaskan ide, alur kerja, dan target proyek terlebih dahulu secara gratis. Setelah kebutuhan dipahami, saya akan menyusun scope, jadwal, dan penawaran tertulis.' },
-  { q: 'Apakah angka dari kalkulator adalah harga final?', a: 'Bukan. Kalkulator memberikan simulasi rentang investasi dengan asumsi umum. Harga final ditentukan oleh kebutuhan detail, integrasi, desain, sumber data, dan hasil diskusi bersama.' },
-  { q: 'Apakah website dan aplikasi bisa dibuka di HP?', a: 'Ya. Antarmuka dirancang responsif untuk mobile dan desktop. Untuk kebutuhan aplikasi yang bisa di-install, kita dapat membahas PWA atau aplikasi mobile khusus.' },
-  { q: 'Bisakah membuat proyek secara bertahap?', a: 'Bisa. Kita dapat menyusun MVP atau fase pertama yang mencakup fitur terpenting, lalu menambahkan modul berikutnya sesuai prioritas dan anggaran.' },
-  { q: 'Bagaimana setelah aplikasi selesai?', a: 'Proyek diserahkan dengan panduan penggunaan dan proses handover. Ruang lingkup dukungan, perbaikan bug, hosting, serta maintenance disepakati dengan jelas dalam penawaran.' },
+const FAQ = [
+  { question: 'Apakah bisa konsultasi sebelum menentukan paket?', answer: 'Tentu. Konsultasi awal tidak berbayar. Ceritakan tantangan bisnis, pengguna aplikasi, dan hal yang ingin Anda otomatisasi. Saya bantu mengurai kebutuhan sebelum menyusun scope pekerjaan.' },
+  { question: 'Apakah kalkulator menampilkan harga final?', answer: 'Belum. Kalkulator memberikan rentang simulasi berdasarkan jenis proyek, kompleksitas, dan fitur. Penawaran final disusun secara tertulis setelah kebutuhan, integrasi, dan batas pekerjaan disepakati.' },
+  { question: 'Bisa dimulai dari fitur paling penting dulu?', answer: 'Bisa. Kita dapat menentukan MVP atau tahap pertama agar fitur utama bisa diluncurkan lebih dulu. Fitur lanjutan dapat masuk fase pengembangan berikutnya.' },
+  { question: 'Bagaimana aplikasi digunakan di HP?', answer: 'Antarmuka dibuat responsif untuk layar kecil dan besar. Jika proyek membutuhkan aplikasi yang dapat dipasang di perangkat, opsi PWA atau mobile app dapat didiskusikan sejak awal.' },
+  { question: 'Apa yang saya dapat setelah proyek selesai?', answer: 'Hasil dan proses serah-terima mengikuti penawaran yang disetujui, termasuk dokumentasi, panduan penggunaan, dan ketentuan dukungan pascarilis. Domain, hosting, dan maintenance dibicarakan sejak tahap perencanaan.' },
 ];
 
-function Brand() {
-  return <a className="brand" href="#beranda" aria-label="Codday996 Solutions - ke beranda"><img src="/logo.png" alt="" width="38" height="38" /><span>codday<span className="brand-accent">996</span><small>SOFTWARE SOLUTIONS</small></span></a>;
+function Reveal({ children, className = '', delay = 0 }) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div className={className} initial={reduce ? false : { opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .12 }}
+      transition={{ duration: reduce ? 0 : .7, delay: reduce ? 0 : delay, ease: [0.2, 0.8, 0.2, 1] }}>
+      {children}
+    </motion.div>
+  );
 }
 
-function Navbar() {
-  const [open, setOpen] = useState(false);
-  return <nav className="site-nav" aria-label="Navigasi utama">
-    <div className="container nav-inner">
-      <Brand />
-      <div className="desktop-nav">{NAV.map(([label, id]) => <a key={id} href={'#' + id}>{label}</a>)}</div>
-      <a className="button button-primary nav-cta" href={getWaLink()} target="_blank" rel="noopener noreferrer">Konsultasi gratis <span aria-hidden="true">↗</span></a>
-      <button className="menu-toggle" type="button" aria-label={open ? 'Tutup menu' : 'Buka menu'} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}><span /><span /><span /></button>
+function Wordmark() {
+  return (
+    <a className="studio-wordmark" href="#beranda" aria-label="Codday996 Solutions, kembali ke beranda">
+      <span className="studio-logo-mark" aria-hidden="true"><span /><span /><span /><span /></span>
+      <span className="studio-wordmark-type"><strong>codday<span>996.</span></strong><small>DIGITAL SOLUTIONS STUDIO</small></span>
+    </a>
+  );
+}
+
+function Navigation() {
+  const [active, setActive] = useState('beranda');
+  useEffect(() => {
+    if (!('IntersectionObserver' in window)) return;
+    const nodes = NAV.map(item => document.getElementById(item.id)).filter(Boolean);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) setActive(entry.target.id); });
+    }, { rootMargin: '-20% 0px -62% 0px', threshold: 0 });
+    nodes.forEach(node => observer.observe(node));
+    return () => observer.disconnect();
+  }, []);
+  return (
+    <>
+      <header className="studio-header">
+        <div className="studio-shell studio-header-inner">
+          <Wordmark />
+          <nav className="studio-desktop-links" aria-label="Navigasi utama">
+            <a href="#layanan">Layanan</a>
+            <a href="#karya">Portfolio</a>
+            <a href="#proses">Cara kerja</a>
+            <a href="#estimasi">Estimasi biaya</a>
+          </nav>
+          <a className="studio-header-cta" href={getWaLink()} target="_blank" rel="noopener noreferrer">
+            Konsultasi gratis <Icon name="ext" size={16} />
+          </a>
+        </div>
+      </header>
+      <nav className="studio-mobile-dock" aria-label="Navigasi mobile">
+        {NAV.map(item => (
+          <a key={item.id} href={'#' + item.id} aria-current={active === item.id ? 'page' : undefined}
+            className={active === item.id ? 'is-active' : ''} onClick={() => setActive(item.id)}>
+            <span className="studio-dock-icon"><Icon name={item.icon} size={20} /></span>
+            <span>{item.title}</span>
+          </a>
+        ))}
+      </nav>
+    </>
+  );
+}
+
+function SectionHeading({ eyebrow, title, emphasis, description, light = false }) {
+  return (
+    <div className={'studio-section-heading' + (light ? ' on-dark' : '')}>
+      <div>
+        <p className="studio-kicker"><span className="studio-kicker-line" /> {eyebrow}</p>
+        <h2>{title} <em>{emphasis}</em></h2>
+      </div>
+      {description && <p className="studio-section-intro">{description}</p>}
     </div>
-    {open && <div id="mobile-menu" className="mobile-menu">{NAV.map(([label, id]) => <a href={'#' + id} key={id} onClick={() => setOpen(false)}>{label} <span>↗</span></a>)}<a href={getWaLink()} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>Konsultasi WhatsApp ↗</a></div>}
-  </nav>;
+  );
 }
 
 function Hero() {
-  return <header className="hero" id="beranda">
-    <div className="hero-orb hero-orb-one" aria-hidden="true" /><div className="hero-orb hero-orb-two" aria-hidden="true" />
-    <div className="container hero-layout">
-      <div className="hero-copy">
-        <div className="hero-availability"><span className="availability-dot" /> PENGEMBANGAN WEBSITE & APLIKASI CUSTOM</div>
-        <h1>Ide bisnis Anda.<br /><span>Jadi sistem digital</span><br />yang benar-benar bekerja.</h1>
-        <p>Website profesional, aplikasi operasional, dan dashboard custom yang memudahkan kerja tim dan membantu bisnis bertumbuh. Dirancang rapi, mudah digunakan, dan nyaman di setiap perangkat.</p>
-        <div className="hero-actions"><a className="button button-primary button-large" href="#kalkulator">Hitung estimasi biaya <span aria-hidden="true">↗</span></a><a className="button button-outline button-large" href="#portfolio">Lihat hasil pekerjaan <span aria-hidden="true">→</span></a></div>
-        <div className="hero-assurances"><span><Icon name="check" size={16} /> Konsultasi awal gratis</span><span><Icon name="check" size={16} /> Scope & biaya transparan</span><span><Icon name="check" size={16} /> Mobile-friendly</span></div>
-      </div>
-      <div className="hero-visual" aria-label="Cuplikan antarmuka proyek yang telah dibuat">
-        <div className="hero-browser">
-          <div className="browser-top"><div className="browser-dots"><i /><i /><i /></div><span>PROJECT SHOWCASE / MDNET</span><Icon name="shield" size={14} /></div>
-          <div className="browser-screen"><img src="/mdnet-desktop.png" alt="Cuplikan dashboard MDNet untuk pengelolaan pelanggan dan operasional WiFi" fetchPriority="high" /></div>
-          <div className="browser-foot"><span><span className="live-dot" /> Project showcase</span><span>01 / 06</span></div>
+  const reduce = useReducedMotion();
+  return (
+    <section className="studio-hero" id="beranda" aria-labelledby="hero-title">
+      <div className="studio-hero-decoration" aria-hidden="true"><span /><span /><span /></div>
+      <div className="studio-shell studio-hero-grid">
+        <div className="studio-hero-copy">
+          <motion.div initial={reduce ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .6 }} className="studio-pill">
+            <span className="studio-pill-dot" /> SOLUSI DIGITAL UNTUK BISNIS YANG TERUS BERGERAK
+          </motion.div>
+          <motion.h1 id="hero-title" initial={reduce ? false : { opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .75, delay: .1 }}>
+            Bisnis Anda punya potensi besar.<br /><span>Teknologinya</span> <em>kami bantu wujudkan.</em>
+          </motion.h1>
+          <motion.p className="studio-hero-lead" initial={reduce ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .65, delay: .22 }}>
+            Website, aplikasi bisnis, dan sistem operasional custom yang dirancang untuk membuat pekerjaan lebih ringkas dan pengalaman pelanggan lebih baik.
+          </motion.p>
+          <motion.div className="studio-hero-actions" initial={reduce ? false : { opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .3 }}>
+            <a className="studio-btn studio-btn-dark" href="#estimasi">Hitung estimasi proyek <span className="studio-btn-arrow">↗</span></a>
+            <a className="studio-btn studio-btn-line" href="#karya">Lihat karya kami <span aria-hidden="true">→</span></a>
+          </motion.div>
+          <div className="studio-hero-proof">
+            <div className="studio-proof-number"><strong>06<span>+</span></strong><span>contoh proyek<br />di portfolio</span></div>
+            <div className="studio-proof-separator" />
+            <p><Icon name="check" size={17} /> Konsultasi tanpa biaya awal<br /><Icon name="check" size={17} /> Lihat karya dan demo sebelum diskusi</p>
+          </div>
         </div>
-        <div className="floating-proof"><span className="proof-icon"><Icon name="globe" size={23} /></span><span><strong>6 proyek di portfolio</strong><small>Dengan cuplikan dan tautan demo</small></span></div>
-        <div className="visual-outline" aria-hidden="true" />
+        <motion.div className="studio-hero-art" initial={reduce ? false : { opacity: 0, scale: .94, rotate: -2 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ duration: 1, delay: .12, ease: [0.22, 1, 0.36, 1] }}>
+          <div className="studio-art-grid" aria-hidden="true" />
+          <span className="studio-art-superscript">C/996 — SELECTED WORK</span>
+          <div className="studio-art-sculpture" aria-hidden="true"><div className="studio-ring studio-ring-a" /><div className="studio-ring studio-ring-b" /><div className="studio-ring studio-ring-c" /></div>
+          <div className="studio-showcase-window">
+            <div className="studio-showcase-toolbar"><span><i /><i /><i /></span><small>MDNET • ADMIN DASHBOARD</small><Icon name="shield" size={15} /></div>
+            <img src="/mdnet-desktop.png" alt="Tampilan nyata dashboard MDNet yang dikembangkan dalam portfolio" fetchPriority="high" />
+          </div>
+          <div className="studio-art-floating-card"><span className="studio-art-card-symbol">↗</span><span><strong>Built for real work.</strong><small>Rapi. Fungsional. Nyaman digunakan.</small></span></div>
+          <div className="studio-art-bottom">01 / REAL PROJECT SHOWCASE <span>SCROLL TO EXPLORE ↓</span></div>
+        </motion.div>
       </div>
-    </div>
-    <div className="container hero-bottom"><span>BUILD WITH PURPOSE. SHIP WITH CONFIDENCE.</span><a href="#layanan">JELAJAHI LAYANAN <span>↓</span></a></div>
-  </header>;
+      <div className="studio-shell studio-hero-meta"><span>INDEPENDENT DIGITAL DEVELOPMENT STUDIO</span><span>BASED IN INDONESIA • AVAILABLE ONLINE</span></div>
+    </section>
+  );
 }
 
-function SectionLabel({ children }) { return <span className="eyebrow"><span className="eyebrow-line" /> {children}</span>; }
+function Marquee() {
+  const words = ['Web development', 'Business dashboard', 'Mobile experience', 'Automation', 'Digital solutions'];
+  return (
+    <div className="studio-marquee" aria-label="Fokus keahlian">
+      <div className="studio-marquee-track" aria-hidden="true">
+        {[...words, ...words].map((word, index) => <span key={word + index}>{word}<i>✳</i></span>)}
+      </div>
+    </div>
+  );
+}
 
 function Services() {
-  return <section className="section section-services" id="layanan"><div className="container">
-    <div className="section-heading"><div><SectionLabel>APA YANG BISA SAYA BANTU</SectionLabel><h2>Solusi digital untuk <em>kebutuhan nyata.</em></h2></div><p>Tidak hanya bagus dilihat. Setiap produk dirancang untuk menyelesaikan masalah dan mempermudah pekerjaan sehari-hari.</p></div>
-    <div className="services-grid">{CONFIG.services.map((s, i) => <article className="service-card" key={s.title}><div className="service-top"><div className="service-icon"><Icon name={s.icon} size={28} /></div><span>0{i + 1} / 04</span></div><h3>{s.title}</h3><p>{s.desc}</p><div className="service-tags">{s.bullets.map(b => <span key={b}>{b}</span>)}</div></article>)}</div>
-  </div></section>;
+  const data = [
+    { id: '01', icon: 'globe', type: 'DIGITAL PRESENCE', title: 'Website yang tampil meyakinkan.', desc: 'Website company profile, katalog, landing page, atau pengalaman web interaktif yang memberi kesan profesional sejak kunjungan pertama.', items: ['Profil & landing page', 'Desain responsif', 'SEO teknis dasar'] },
+    { id: '02', icon: 'chart', type: 'BUSINESS SYSTEM', title: 'Operasional lebih tertata.', desc: 'Dashboard dan aplikasi web yang menyesuaikan proses kerja: pelanggan, transaksi, stok, laporan, maupun manajemen tim.', items: ['Dashboard & laporan', 'Hak akses pengguna', 'Integrasi data'] },
+    { id: '03', icon: 'smartphone', type: 'MOBILE EXPERIENCE', title: 'Akses praktis dari mana saja.', desc: 'Sistem yang nyaman digunakan dari HP sampai desktop, dengan opsi PWA atau aplikasi mobile sesuai kebutuhan pengguna.', items: ['Mobile-first interface', 'PWA & sistem custom', 'Alur kerja yang mudah'] },
+  ];
+  return (
+    <section className="studio-services studio-section" id="layanan">
+      <div className="studio-shell">
+        <Reveal><SectionHeading eyebrow="01 — APA YANG KAMI KERJAKAN" title="Bukan sekadar terlihat bagus." emphasis="Harus terasa manfaatnya." description="Solusi yang tepat bukan yang paling rumit. Melainkan yang benar-benar membantu bisnis Anda bekerja lebih efektif." /></Reveal>
+        <div className="studio-services-grid">{data.map((service, index) => (
+          <Reveal key={service.id} delay={index * .08}>
+            <article className="studio-service-card">
+              <div className="studio-service-top"><span>{service.id} / 03</span><Icon name={service.icon} size={27} /></div>
+              <p className="studio-service-type">{service.type}</p>
+              <h3>{service.title}</h3><p className="studio-service-description">{service.desc}</p>
+              <div className="studio-service-tags">{service.items.map(item => <span key={item}>{item}</span>)}</div>
+              <a href={getWaLink('Halo Codday996 Solutions, saya ingin diskusi tentang ' + service.title)} target="_blank" rel="noopener noreferrer" className="studio-service-link">Diskusikan kebutuhan <span aria-hidden="true">↗</span></a>
+            </article>
+          </Reveal>
+        ))}</div>
+      </div>
+    </section>
+  );
 }
 
 function Portfolio() {
   const [selected, setSelected] = useState(0);
+  const [device, setDevice] = useState('desktop');
+  const reduce = useReducedMotion();
   const project = CONFIG.projects[selected];
-  return <section className="section portfolio-section" id="portfolio"><div className="container">
-    <div className="section-heading"><div><SectionLabel>SELECTED WORK / PORTFOLIO</SectionLabel><h2>Bukan sekadar janji.<br /><em>Lihat hasilnya.</em></h2></div><p>Beberapa proyek yang telah dibuat, mulai dari sistem operasional sampai website promosi. Pilih untuk melihat cuplikan dan buka demo yang tersedia.</p></div>
-    <div className="portfolio-layout">
-      <div className="portfolio-tabs" role="tablist" aria-label="Pilih proyek">{CONFIG.projects.map((item, i) => <button key={item.name} id={'project-tab-' + i} role="tab" aria-selected={selected === i} aria-controls="project-display" tabIndex={selected === i ? 0 : -1} className={'portfolio-tab' + (i === selected ? ' active' : '')} onClick={() => setSelected(i)}><span className="project-index">{String(i + 1).padStart(2, '0')}</span><span><strong>{item.name}</strong><small>{item.tag}</small></span><span className="project-arrow">↗</span></button>)}</div>
-      <div className="portfolio-display" id="project-display" role="tabpanel" aria-labelledby={'project-tab-' + selected} key={project.name}>
-        <div className="portfolio-image-wrap"><img src={project.shotDesktop} alt={'Cuplikan antarmuka ' + project.name} loading="lazy" /><span className="project-demo-label"><span className="live-dot" /> PROJECT PREVIEW</span></div>
-        <div className="portfolio-description"><div><span className="portfolio-category">{project.tag}</span><h3>{project.name}</h3><p>{project.shortDesc}</p></div><a href={project.url} className="button button-outline" target="_blank" rel="noopener noreferrer">Buka demo <span>↗</span></a></div>
-        <div className="project-feature-row">{project.features.slice(0,3).map(feature => <span key={feature}><Icon name="check" size={14} /> {feature}</span>)}</div>
+  const mobileAvailable = Boolean(project.shotMobile);
+  const photo = device === 'mobile' && mobileAvailable ? project.shotMobile : project.shotDesktop;
+  const selectProject = (index) => { setSelected(index); setDevice('desktop'); };
+  return (
+    <section className="studio-work studio-section" id="karya">
+      <div className="studio-shell">
+        <Reveal><SectionHeading light eyebrow="02 — PEKERJAAN PILIHAN" title="Pekerjaan nyata." emphasis="Bukan mockup kosong." description="Jelajahi enam proyek dari berbagai kebutuhan. Pilih proyek, lihat cuplikan tampilannya, lalu buka tautan demo jika tersedia." /></Reveal>
+        <div className="studio-work-layout">
+          <div className="studio-work-list" role="tablist" aria-label="Pilih karya portfolio">
+            {CONFIG.projects.map((item, index) => (
+              <button id={'studio-project-tab-' + index} key={item.name} type="button" role="tab" aria-selected={selected === index}
+                aria-controls="studio-project-panel" tabIndex={selected === index ? 0 : -1} onClick={() => selectProject(index)}
+                className={'studio-work-tab' + (selected === index ? ' is-active' : '')}>
+                <span className="studio-work-index">{String(index + 1).padStart(2, '0')}</span>
+                <span className="studio-work-tab-copy"><strong>{item.name}</strong><small>{item.tag}</small></span>
+                <span className="studio-work-tab-arrow">↗</span>
+              </button>
+            ))}
+          </div>
+          <div className="studio-work-feature" role="tabpanel" id="studio-project-panel" aria-labelledby={'studio-project-tab-' + selected}>
+            <div className="studio-work-feature-top"><span><i /> FEATURED PROJECT / {String(selected + 1).padStart(2, '0')}</span><div className="studio-device-controls" role="group" aria-label="Pilih tampilan proyek">
+              <button type="button" className={device === 'desktop' ? 'active' : ''} aria-pressed={device === 'desktop'} onClick={() => setDevice('desktop')}><Icon name="monitor" size={16} /> Desktop</button>
+              {mobileAvailable && <button type="button" className={device === 'mobile' ? 'active' : ''} aria-pressed={device === 'mobile'} onClick={() => setDevice('mobile')}><Icon name="smartphone" size={16} /> Mobile</button>}
+            </div></div>
+            <div className={'studio-work-image-stage' + (device === 'mobile' && mobileAvailable ? ' mobile-preview' : '')}>
+              <div className="studio-stage-glow" aria-hidden="true" />
+              <AnimatePresence mode="wait">
+                <motion.div className="studio-work-screen" key={project.name + device} initial={reduce ? false : { opacity: 0, y: 16, scale: .96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={reduce ? undefined : { opacity: 0, y: -8, scale: .98 }} transition={{ duration: .28 }}>
+                  <div className="studio-screen-bar"><span><i /><i /><i /></span><small>{project.name.toLowerCase().replaceAll(' ', '-')}.app</small></div>
+                  <img src={photo} alt={'Cuplikan tampilan ' + project.name + ' pada ' + (device === 'mobile' ? 'mobile' : 'desktop')} loading="lazy" />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+            <div className="studio-work-feature-bottom">
+              <div><span>{project.tag}</span><h3>{project.name}</h3><p>{project.shortDesc}</p></div>
+              <a className="studio-work-open" href={project.url} target="_blank" rel="noopener noreferrer" aria-label={'Buka demo ' + project.name}><Icon name="ext" size={24} /></a>
+            </div>
+          </div>
+        </div>
+        <p className="studio-work-disclaimer">Cuplikan dan tautan adalah referensi portfolio. Akses demo dapat berubah sesuai ketersediaan masing-masing sistem.</p>
       </div>
-    </div>
-    <p className="portfolio-footnote">Demo merupakan contoh hasil pengembangan. Ketersediaan akses dan fitur bergantung pada masing-masing proyek.</p>
-  </div></section>;
+    </section>
+  );
 }
 
-function Process() {
-  return <section className="section process-section" id="proses"><div className="container">
-    <div className="section-heading"><div><SectionLabel>CARA KERJA</SectionLabel><h2>Dari ide sampai online,<br /><em>semua jelas prosesnya.</em></h2></div><p>Anda tahu apa yang sedang dikerjakan, apa yang akan didapat, dan apa langkah berikutnya di setiap tahap.</p></div>
-    <div className="process-grid">{CONFIG.process.map((step,i) => <article className="process-card" key={step.step}><div className="process-number">{step.step}<span>{i < 3 ? '→' : '✓'}</span></div><h3>{step.title}</h3><p>{step.desc}</p></article>)}</div>
-  </div></section>;
+function Approach() {
+  const steps = [
+    { no: '01', name: 'Memahami kebutuhan', desc: 'Kita bahas masalah, alur bisnis, pengguna, dan hasil yang ingin dicapai.' },
+    { no: '02', name: 'Merancang solusi', desc: 'Fitur prioritas, scope, tampilan awal, jadwal, dan penawaran dirangkum dengan jelas.' },
+    { no: '03', name: 'Membangun & menguji', desc: 'Pengembangan bertahap dengan evaluasi pada titik yang telah disepakati.' },
+    { no: '04', name: 'Rilis & serah terima', desc: 'Persiapan peluncuran, panduan penggunaan, dan opsi dukungan pascarilis.' },
+  ];
+  return (
+    <section className="studio-approach studio-section" id="proses">
+      <div className="studio-shell">
+        <Reveal><SectionHeading eyebrow="03 — PROSES KERJA" title="Proses terarah." emphasis="Tanpa tebak-tebakan." description="Saya percaya pengalaman bekerja sama harus sama baiknya dengan produk yang dibuat." /></Reveal>
+        <div className="studio-approach-grid">{steps.map((step, index) => (
+          <Reveal key={step.no} delay={index * .07}><article className="studio-approach-step"><div className="studio-approach-number">{step.no}<span>↗</span></div><h3>{step.name}</h3><p>{step.desc}</p></article></Reveal>
+        ))}</div>
+        <Reveal className="studio-approach-statement"><span className="studio-statement-icon"><Icon name="shield" size={26} /></span><div><strong>Kualitas dimulai dari ekspektasi yang jelas.</strong><span>Ruang lingkup dan biaya disepakati sebelum pengerjaan. Kalkulator membantu langkah pertama, bukan menggantikan penawaran tertulis.</span></div><a href="#estimasi">Simulasikan biaya <span>↗</span></a></Reveal>
+      </div>
+    </section>
+  );
 }
 
-function Faq() {
-  const [active, setActive] = useState(0);
-  return <section className="section faq-section" id="faq"><div className="container faq-layout"><div><SectionLabel>PERTANYAAN UMUM</SectionLabel><h2>Hal yang perlu Anda<br /><em>ketahui lebih dulu.</em></h2><p>Belum menemukan jawabannya? Ceritakan saja kebutuhan proyek Anda melalui WhatsApp.</p><a href={getWaLink()} target="_blank" rel="noopener noreferrer" className="faq-contact">Tanya langsung <span>↗</span></a></div><div className="faq-items">{QUESTIONS.map((item,i) => <div className={'faq-item' + (active === i ? ' open' : '')} key={item.q}><h3><button type="button" aria-expanded={active === i} aria-controls={'faq-answer-' + i} onClick={() => setActive(active === i ? -1 : i)}><span>{item.q}</span><span className="faq-toggle">{active === i ? '−' : '+'}</span></button></h3>{active === i && <div className="faq-answer" id={'faq-answer-' + i}><p>{item.a}</p></div>}</div>)}</div></div></section>;
+function FAQs() {
+  const [expanded, setExpanded] = useState(0);
+  return (
+    <section className="studio-faq studio-section" id="faq">
+      <div className="studio-shell studio-faq-grid">
+        <Reveal className="studio-faq-left">
+          <p className="studio-kicker"><span className="studio-kicker-line" /> 05 — FAQ</p>
+          <h2>Pertanyaan yang <em>sering muncul.</em></h2>
+          <p>Jawaban singkat sebelum kita mulai. Kalau ada kebutuhan khusus, lebih mudah dibahas langsung.</p>
+          <a href={getWaLink()} target="_blank" rel="noopener noreferrer" className="studio-text-link">Tanya via WhatsApp <span>↗</span></a>
+        </Reveal>
+        <div className="studio-faq-list">
+          {FAQ.map((item, index) => (
+            <div className={'studio-faq-item' + (expanded === index ? ' is-open' : '')} key={item.question}>
+              <h3><button type="button" aria-expanded={expanded === index} aria-controls={'studio-faq-answer-' + index} onClick={() => setExpanded(expanded === index ? -1 : index)}><span>{item.question}</span><span className="studio-faq-plus" aria-hidden="true">{expanded === index ? '−' : '+'}</span></button></h3>
+              {expanded === index && <div id={'studio-faq-answer-' + index} className="studio-faq-answer"><p>{item.answer}</p></div>}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function Contact() {
-  return <section className="contact-section" id="kontak"><div className="container"><div className="contact-card"><span className="contact-eyebrow">PUNYA IDE PROYEK?</span><h2>Mari buat sesuatu<br />yang <em>berguna untuk bisnis Anda.</em></h2><p>Ceritakan masalah atau ide Anda. Saya bantu memilih solusi dan tahap pengembangan yang masuk akal—tanpa kewajiban langsung memesan.</p><div className="contact-actions"><a className="button button-white" href={getWaLink()} target="_blank" rel="noopener noreferrer"><Icon name="wa" size={19} /> Diskusi via WhatsApp ↗</a><a className="button button-contact-outline" href={getMailLink()}><Icon name="mail" size={18} /> Kirim email</a></div><div className="contact-decoration" aria-hidden="true">↗</div></div>
-    <footer className="footer"><div><Brand /><p>Solusi digital yang terlihat profesional dan bekerja untuk kebutuhan Anda.</p></div><div className="footer-links"><a href="#layanan">Layanan</a><a href="#portfolio">Portfolio</a><a href="#kalkulator">Estimasi</a><a href="https://github.com/tarmizy" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div><div className="footer-bottom"><span>© {new Date().getFullYear()} Codday996 Solutions. All rights reserved.</span><span>Dirancang untuk pengalaman desktop & mobile.</span></div></footer>
-  </div></section>;
+  return (
+    <section className="studio-contact" id="kontak">
+      <div className="studio-shell">
+        <Reveal>
+          <div className="studio-contact-panel">
+            <div className="studio-contact-orbit" aria-hidden="true" />
+            <p className="studio-contact-kicker"><span /> PUNYA IDE YANG INGIN DIREALISASIKAN?</p>
+            <h2>Mari buat teknologi<br /><em>yang bekerja untuk Anda.</em></h2>
+            <p>Mulai dari diskusi sederhana. Ceritakan kebutuhan bisnis Anda, dan kita temukan solusi yang paling masuk akal.</p>
+            <div className="studio-contact-buttons">
+              <a href={getWaLink()} className="studio-btn studio-btn-light" target="_blank" rel="noopener noreferrer"><Icon name="wa" size={18} /> Mulai konsultasi <span>↗</span></a>
+              <a href={getMailLink()} className="studio-btn studio-btn-translucent"><Icon name="mail" size={18} /> Kirim email</a>
+            </div>
+          </div>
+        </Reveal>
+        <footer className="studio-footer">
+          <div className="studio-footer-top"><div><Wordmark /><p>Website & aplikasi custom yang membantu bisnis bergerak lebih baik.</p></div><nav aria-label="Navigasi footer"><a href="#layanan">Layanan</a><a href="#karya">Portfolio</a><a href="#estimasi">Estimasi</a><a href="#faq">FAQ</a><a href="https://github.com/tarmizy" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav></div>
+          <div className="studio-footer-bottom"><span>© {new Date().getFullYear()} Codday996 Solutions.</span><span>Made with purpose, built for people.</span></div>
+        </footer>
+      </div>
+    </section>
+  );
 }
 
 export default function LandingPage() {
-  return <><Navbar /><main><Hero /><Services /><Portfolio /><Process /><Estimator /><Faq /><Contact /></main><a className="floating-whatsapp" href={getWaLink()} target="_blank" rel="noopener noreferrer" aria-label="Chat melalui WhatsApp"><Icon name="wa" size={23} /><span>Chat proyek</span></a></>;
+  return <><Navigation /><main><Hero /><Marquee /><Services /><Portfolio /><Approach /><Estimator /><FAQs /><Contact /></main></>;
 }
