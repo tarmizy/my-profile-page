@@ -34,9 +34,9 @@ function Reveal({ children, className = '', delay = 0 }) {
 
 function Wordmark() {
   return (
-    <a className="studio-wordmark" href="#beranda" aria-label="Codday996 Solutions, kembali ke beranda">
-      <span className="studio-logo-mark" aria-hidden="true"><span /><span /><span /><span /></span>
-      <span className="studio-wordmark-type"><strong>codday<span>996.</span></strong><small>DIGITAL SOLUTIONS STUDIO</small></span>
+    <a className="studio-wordmark" href="#beranda" aria-label="codday Digital Solutions, kembali ke beranda">
+      <img className="studio-logo-image" src="/codday-mark.svg" alt="" width="40" height="46" />
+      <span className="studio-wordmark-type"><strong>codday<span>.</span></strong><small>DIGITAL SOLUTIONS STUDIO</small></span>
     </a>
   );
 }
@@ -120,15 +120,10 @@ function Hero() {
           </div>
         </div>
         <motion.div className="studio-hero-art" initial={reduce ? false : { opacity: 0, scale: .94, rotate: -2 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ duration: 1, delay: .12, ease: [0.22, 1, 0.36, 1] }}>
-          <div className="studio-art-grid" aria-hidden="true" />
-          <span className="studio-art-superscript">C/996 — SELECTED WORK</span>
-          <div className="studio-art-sculpture" aria-hidden="true"><div className="studio-ring studio-ring-a" /><div className="studio-ring studio-ring-b" /><div className="studio-ring studio-ring-c" /></div>
-          <div className="studio-showcase-window">
-            <div className="studio-showcase-toolbar"><span><i /><i /><i /></span><small>MDNET • ADMIN DASHBOARD</small><Icon name="shield" size={15} /></div>
-            <img src="/mdnet-desktop.png" alt="Tampilan nyata dashboard MDNet yang dikembangkan dalam portfolio" fetchPriority="high" />
-          </div>
-          <div className="studio-art-floating-card"><span className="studio-art-card-symbol">↗</span><span><strong>Built for real work.</strong><small>Rapi. Fungsional. Nyaman digunakan.</small></span></div>
-          <div className="studio-art-bottom">01 / REAL PROJECT SHOWCASE <span>SCROLL TO EXPLORE ↓</span></div>
+          <img className="studio-hero-concept" src="/codday-idea-solution.svg" alt="Ilustrasi proses mengubah tantangan bisnis menjadi sistem digital yang lebih teratur" fetchPriority="high" />
+          <span className="studio-art-superscript">CODDAY — IDEAS INTO SOLUTIONS</span>
+          
+
         </motion.div>
       </div>
       <div className="studio-shell studio-hero-meta"><span>INDEPENDENT DIGITAL DEVELOPMENT STUDIO</span><span>BASED IN INDONESIA • AVAILABLE ONLINE</span></div>
@@ -297,7 +292,7 @@ function Contact() {
         </Reveal>
         <footer className="studio-footer">
           <div className="studio-footer-top"><div><Wordmark /><p>Website & aplikasi custom yang membantu bisnis bergerak lebih baik.</p></div><nav aria-label="Navigasi footer"><a href="#layanan">Layanan</a><a href="#karya">Portfolio</a><a href="#estimasi">Estimasi</a><a href="#faq">FAQ</a><a href="https://github.com/tarmizy" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav></div>
-          <div className="studio-footer-bottom"><span>© {new Date().getFullYear()} Codday996 Solutions.</span><span>Made with purpose, built for people.</span></div>
+          <div className="studio-footer-bottom"><span>© {new Date().getFullYear()} codday Digital Solutions.</span><span>Made with purpose, built for people.</span></div>
         </footer>
       </div>
     </section>
