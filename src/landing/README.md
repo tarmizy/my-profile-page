@@ -2,7 +2,7 @@
 
 UI dibangun ulang untuk menarik calon klien bisnis menengah dengan sistem visual editorial, fokus pada bukti karya dan konversi yang ramah di HP.
 
-- `LandingPage.jsx`: hero, dock, services, portfolio preview, proses kerja, FAQ, kontak.
+- `LandingPage.jsx`: hero gambar statis, dock, services, portfolio preview, proses kerja, FAQ, kontak.
 - `Estimator.jsx`: kalkulator terhubung ke `shared/estimate.js` dan WhatsApp.
 - `landing.css`: token dan komposisi visual premium; breakpoint 1120 / 860 / 520.
 
@@ -21,3 +21,7 @@ Visual dan interaksi dibuat sebagai implementasi orisinal React + CSS yang menye
 - Uji 320px, 375px, 430px, 768px, 1024px, 1440px; mode landscape, keyboard, dan reduced motion.
 - Pastikan semua tautan demo dan kontak masih valid sebelum merge.
 - Verifikasi harga dasar, biaya fitur, dan durasi kalkulator sebelum menjadi halaman publik.
+
+### Hero final
+
+Memakai `/codday-hero-poster.webp` (gambar konsep problem → solution yang disetujui). Tidak ada video, autoplay, atau gerakan pada artwork hero. Semua sisi gambar terlihat di mobile dan desktop tanpa pemotongan (`aspect-ratio:1/1`, `object-fit:contain`).
