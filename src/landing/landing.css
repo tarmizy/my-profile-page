@@ -43,3 +43,7 @@
   .studio-contact-panel>p:not(.studio-contact-kicker){font-size:14px}
   .studio-faq-left>p:not(.studio-kicker){font-size:14px}
 }
+
+/* Codday visual identity — hero artwork replaces the dashboard screenshot. */
+.studio-logo-image{width:40px;height:46px;object-fit:contain;flex-shrink:0}.studio-hero-art{background:#10291f;display:flex;align-items:center;justify-content:center}.studio-hero-concept{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit}.studio-hero-art .studio-art-superscript{display:none}.studio-footer .studio-logo-image{width:40px;height:46px}.studio-wordmark-type strong span{color:#83ab4c}
+@media(max-width:520px){.studio-logo-image{width:34px;height:39px}.studio-footer .studio-logo-image{width:34px;height:39px}.studio-hero-concept{object-fit:cover}}
