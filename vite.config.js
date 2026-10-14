@@ -15,8 +15,8 @@ export default defineConfig({
         name: 'Codday996 Solutions — Sistem Manajemen Digital',
         short_name: 'Codday996 Solutions',
         description: 'Sistem manajemen berbasis web & mobile — lengkap dashboard & laporan',
-        theme_color: '#05050f',
-        background_color: '#05050f',
+        theme_color: '#0b211b',
+        background_color: '#0b211b',
         display: 'standalone',
         orientation: 'any',
         start_url: '/',
@@ -26,9 +26,9 @@ export default defineConfig({
         ],
       },
       workbox: {
-        maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
+        maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
-        globIgnores: ['**/video-background.mp4'],
+        globIgnores: ['**/video-background.mp4', '**/*-desktop.png', '**/*-mobile.png', '**/Makeup-desktop.png'],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
